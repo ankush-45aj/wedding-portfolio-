@@ -1,10 +1,14 @@
 {
     "buildCommand": "npm run build",
-    "outputDirectory": "dist",
     "framework": "vite",
+    "outputDirectory": "dist",
     "routes": [
         {
-            "src": "/.*",
+            "src": "^/assets/(.*)",
+            "dest": "/assets/$1"
+        },
+        {
+            "src": "^/(.*)",
             "dest": "/index.html"
         }
     ]
