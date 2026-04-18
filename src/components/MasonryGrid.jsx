@@ -1,232 +1,366 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Camera, Calendar, Search, ArrowUpRight } from 'lucide-react';
-import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { masonryPreset, IMAGE_NAMES } from '../config/cloudinary';
 
+// ─── Images: exactly 9 ───────────────────────────────────────────────────────
 const images = [
-  { src: 'https://images.unsplash.com/photo-1519741497674-611481863552', alt: 'Wedding moment' },
-  { src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc', alt: 'Couple' },
-  { src: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf', alt: 'Hands' },
-  { src: 'https://images.unsplash.com/photo-1519225495042-ef5a02073dc2', alt: 'Photographer' },
-  { src: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74', alt: 'Venue' },
-  { src: 'https://images.unsplash.com/photo-1465495910483-34d1b37c024d', alt: 'Celebration' },
-  { src: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8', alt: 'Flowers' },
-  { src: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486', alt: 'Friends' },
-  { src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc', alt: 'Group' },
+  // { src: masonryPreset(IMAGE_NAMES.MASONRY_WEDDING_MOMENT, '1/1'), alt: 'Wedding moment', name: 'Wedding Moment', caption: 'The moment we said forever' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_COUPLE, '4/3'), alt: 'Couple', name: 'Couple Portrait', caption: 'Just us against the world' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_HANDS, '1/1'), alt: 'Hands', name: 'Wedding Hands', caption: 'Holding hands, holding hearts' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_PHOTOGRAPHER, '4/5'), alt: 'Photographer', name: 'Behind the Scenes', caption: 'Capturing memories in the making' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_VENUE, '4/3'), alt: 'Venue', name: 'Venue Decoration', caption: 'Where magic happened' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_FLOWERS, '4/3'), alt: 'Flowers', name: 'Floral Arrangements', caption: 'Blooms of happiness' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_FRIENDS, '4/3'), alt: 'Friends', name: 'Friends & Family', caption: 'Surrounded by love' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_WEDDING_MOMENT, '1/1'), alt: 'Wedding moment', name: 'Wedding Moment', caption: 'The moment we said forever' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP1, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP2, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_CELEBRATION, '4/5'), alt: 'Celebration', name: 'Celebration Moment', caption: 'Joy in every frame' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP3, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP4, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP5, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP6, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP7, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP8, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' }
+
+
 ];
 
+// ─── Heart layout on a 9-col × 7-row grid ────────────────────────────────────
+//
+// VISUAL STRUCTURE (each unit = 1 cell):
+//
+//   Col:  0  1  2 | 3  4  5 | 6  7  8
+//         ────────┼─────────┼────────
+//  r0-1   [ 0: 3w×2h ]  [ 1: 3w×2h ]  [ 2: 3w×2h ]   ← Row 1: 3 equal lobes
+//         ────────┼─────────┼────────
+//  r2-4   [ 3: 3w×3h ]  [ 4: 3w×2h ]  [ 5: 3w×3h ]   ← Row 2: OUTER TALLER
+//                    [ 4 ends r3 ]
+//         ────────┼─────────┼────────
+//  r5-6            [ 6: 9w×2h ]                        ← Bottom wide + tip row
+//                  (or split into 3+3+3 with 7,8 side)
+//
+// Actually let's do a cleaner split:
+//
+//   Col:  0  1  2 | 3  4  5 | 6  7  8
+//  r0-1   [  0: 3×2 ][ 1: 3×2 ][ 2: 3×2 ]  ← top row: 3 equal blocks
+//  r2-4   [  3: 3×3 ][ 4: 3×2 ][ 5: 3×3 ]  ← mid row: LEFT & RIGHT taller (3h), centre shorter (2h)
+//  r4-5   (cell 4 ends at r3, so r4 under centre is part of bottom)
+//  r4-5            [ 6: 3×2 ]               ← bottom centre (under cell 4 gap)
+//  r5              [7:3×1][6][8:3×1]         ← lower sides
+//  r6              [ 9th block point ]
+//
+// Simplified clean version:
+//
+//  9-col, 7-row grid. Cols: left=0-2, mid=3-5, right=6-8
+//
+//  [0] col0, row0, 3w, 2h   → top-left lobe
+//  [1] col3, row0, 3w, 2h   → top-mid
+//  [2] col6, row0, 3w, 2h   → top-right lobe
+//  [3] col0, row2, 3w, 3h   → left body (TALL)
+//  [4] col3, row2, 3w, 2h   → centre body (normal)
+//  [5] col6, row2, 3w, 3h   → right body (TALL)
+//  [6] col0, row5, 3w, 1h   → lower-left stub
+//  [7] col3, row4, 3w, 3h   → bottom centre tip (tall → tapers)
+//  [8] col6, row5, 3w, 1h   → lower-right stub
+//
+// ─── Heart layout: 7-col × 7-row grid (for 17 images) ──────────────────────
+// [col, row, colSpan, rowSpan]
+// ─── Heart layout: 7-col × 7-row grid (for 17 images) ──────────────────────
+// ─── Improved Heart Layout (Balanced & Symmetrical) ───────────────────────
+// ─── Improved Heart Layout (17 items, safe) ───────────────────────────────
+const HEART_LAYOUT = [
+  // Top Lobes
+  [1, 0, 1, 1], [2, 0, 1, 1], [4, 0, 1, 1], [5, 0, 1, 1],
+
+  // Shoulders
+  [0, 1, 2, 2], [2, 1, 1, 1], [4, 1, 1, 1], [5, 1, 2, 2],
+
+  // Center Focus (unchanged)
+  [2, 2, 3, 3],
+
+  // Middle Sides
+  [0, 3, 1, 1], [6, 3, 1, 1],
+
+  // Improved Taper (slightly adjusted positions)
+  [1, 4, 1, 1], [5, 4, 1, 1],
+
+  // Bottom Curve
+  [2, 5, 1, 1], [3, 5, 1, 1], [4, 5, 1, 1],
+
+  // Tip
+  [3, 6, 1, 1],
+];
+
+const GRID_COLS = 7;
+const GRID_ROWS = 7;
+
+
+
+// ─── Responsive unit size ────────────────────────────────────────────────────
+const getUnit = (width) => {
+  if (width < 400) return { unit: 38, gap: 3 }; // Mobile
+  if (width < 768) return { unit: 50, gap: 4 }; // Tablet
+  return { unit: 75, gap: 5 };                  // Desktop
+};
+// ─── Decorative heart SVG ────────────────────────────────────────────────────
+const HeartDeco = ({ size = 40, opacity = 0.85 }) => (
+  <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+    <path
+      d="M20 34s-1-1-3-3C10 24 4 19 4 13a8 8 0 0 1 16-1 8 8 0 0 1 16 1c0 6-6 11-13 18-2 2-3 3-3 3z"
+      fill="#f9a8c0" stroke="#e87aaa" strokeWidth="1.5" strokeLinejoin="round" opacity={opacity}
+    />
+    <path d="M13 11c-2 1-3 3-3 5" stroke="#e87aaa" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
+  </svg>
+);
+
+// ─── Pinterest-style heart icon ───────────────────────────────────────────────
+const HeartIcon = ({ filled, className }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill={filled ? '#e60023' : 'none'}
+    stroke={filled ? '#e60023' : 'currentColor'}
+    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+  </svg>
+);
+
+// ─── Main Component ───────────────────────────────────────────────────────────
 const ScatteredGrid = () => {
-  const [index, setIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [likedImages, setLikedImages] = useState(new Set());
+  const [winWidth, setWinWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 800
+  );
+
+  useEffect(() => {
+    const onResize = () => setWinWidth(window.innerWidth);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  const { unit: UNIT, gap: GAP } = getUnit(winWidth);
+  const gridW = GRID_COLS * (UNIT + GAP) - GAP;
+  const gridH = GRID_ROWS * (UNIT + GAP) - GAP;
+
+  const toggleLike = (idx) => {
+    setLikedImages((prev) => {
+      const next = new Set(prev);
+      next.has(idx) ? next.delete(idx) : next.add(idx);
+      return next;
+    });
+  };
+
+  const goToPrevious = () =>
+    setSelectedIndex((p) => (p > 0 ? p - 1 : images.length - 1));
+  const goToNext = () =>
+    setSelectedIndex((p) => (p < images.length - 1 ? p + 1 : 0));
+  const closeLightbox = () => setSelectedIndex(-1);
+
+  useEffect(() => {
+    if (selectedIndex < 0) return;
+    const onKey = (e) => {
+      if (e.key === 'ArrowLeft') goToPrevious();
+      if (e.key === 'ArrowRight') goToNext();
+      if (e.key === 'Escape') closeLightbox();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [selectedIndex]);
+
+  const currentImage = selectedIndex >= 0 ? images[selectedIndex] : null;
 
   return (
-    <section className="min-h-screen bg-[#f5f5f5] font-sans selection:bg-black selection:text-white">
-      <div className="max-w-5xl mx-auto px-4 py-8 md:py-12">
+    <section
+      className="min-h-screen bg-[#f8f5f2] selection:bg-black selection:text-white"
+      style={{ fontFamily: "'Georgia', serif" }}
+    >
+      <div className="max-w-4xl mx-auto px-4 py-10 md:py-16 flex flex-col items-center">
 
-        {/* Header - Instagram Story Style */}
-        <div className="flex justify-between items-start mb-8 md:mb-12">
-          <div className="flex items-center gap-2">
-            <Camera className="w-5 h-5 text-black" strokeWidth={1.5} />
-            <div className="flex flex-col">
-              <span className="text-xs font-medium tracking-wide text-black">Instagram</span>
-              <span className="text-[10px] text-gray-500 -mt-0.5">story</span>
-            </div>
+        {/* ── Heart Collage ─────────────────────────────────────────────── */}
+        <div className="relative flex justify-center items-center mb-10 w-full">
+
+          {/* Deco hearts */}
+          <div className="absolute -top-6 left-2 md:-top-8 md:-left-6 rotate-[-15deg]">
+            <HeartDeco size={winWidth < 600 ? 22 : 36} opacity={0.9} />
+          </div>
+          <div className="absolute -top-3 right-4 md:-top-4 md:right-2 rotate-[10deg]">
+            <HeartDeco size={winWidth < 600 ? 18 : 28} opacity={0.75} />
+          </div>
+          <div className="absolute bottom-0 left-0 md:-left-10 rotate-[5deg]">
+            <HeartDeco size={winWidth < 600 ? 26 : 44} opacity={0.85} />
+          </div>
+          <div className="absolute bottom-4 right-0 md:-right-8 rotate-[-8deg]">
+            <HeartDeco size={winWidth < 600 ? 20 : 32} opacity={0.8} />
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] text-gray-500 uppercase tracking-wider">Periode<br />Mei</span>
-            <div className="border border-black/20 rounded-lg p-1.5 flex flex-col items-center min-w-[32px]">
-              <span className="text-[10px] font-bold text-black">01-30</span>
-            </div>
+          {/* ── Heart grid ───────────────────────────────────────────── */}
+          <div style={{ position: 'relative', width: gridW, height: gridH }}>
+            {HEART_LAYOUT.map(([col, row, colSpan, rowSpan], cellIdx) => {
+              const image = images[cellIdx];
+              const isLiked = likedImages.has(cellIdx);
+              const isSelected = selectedIndex === cellIdx;
+
+              const x = col * (UNIT + GAP);
+              const y = row * (UNIT + GAP);
+              const w = colSpan * (UNIT + GAP) - GAP;
+              const h = rowSpan * (UNIT + GAP) - GAP;
+
+              return (
+                <motion.div
+                  key={cellIdx}
+                  initial={{ opacity: 0, scale: 0.75 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.45, delay: cellIdx * 0.07 }}
+                  style={{
+                    position: 'absolute',
+                    left: x,
+                    top: y,
+                    width: w,
+                    height: h,
+                    outline: isSelected ? '2px solid #e87aaa' : 'none',
+                    outlineOffset: 2,
+                    borderRadius: 4,
+                  }}
+                  onClick={() => setSelectedIndex(cellIdx)}
+                  className="overflow-hidden group cursor-pointer"
+                  whileHover={{ scale: 1.04, zIndex: 10 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover transition-all duration-500 grayscale-[20%] group-hover:grayscale-0"
+                  />
+                  <button
+                    onClick={(e) => { e.stopPropagation(); toggleLike(cellIdx); }}
+                    className={`
+                      absolute top-1 right-1 z-20
+                      w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/90 shadow-sm
+                      flex items-center justify-center
+                      transition-all duration-200 hover:scale-110
+                      ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}
+                    `}
+                  >
+                    <HeartIcon filled={isLiked} className="w-3 h-3 md:w-4 md:h-4" />
+                  </button>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="flex justify-center gap-8 md:gap-16 mb-12 md:mb-16">
-          {['MEMORY', 'PHOTO', 'ARCHIVE'].map((tab, i) => (
-            <button
-              key={tab}
-              className={`text-[11px] tracking-[0.2em] font-medium transition-colors ${i === 0 ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        {/* Scattered Photo Collage */}
-        <div className="relative h-[600px] md:h-[700px] w-full mb-16 md:mb-24">
-
-          {/* Photo 1 - Top Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0 }}
-            onClick={() => setIndex(0)}
-            className="absolute top-0 left-[5%] w-[28%] md:w-[22%] cursor-pointer group z-10"
-          >
-            <div className="overflow-hidden shadow-lg bg-white p-1.5 pb-4">
-              <img src={images[0].src} alt={images[0].alt} className="w-full aspect-[4/5] object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-            </div>
-          </motion.div>
-
-          {/* Photo 2 - Top Right */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            onClick={() => setIndex(1)}
-            className="absolute top-[2%] right-[10%] w-[25%] md:w-[20%] cursor-pointer group z-20"
-          >
-            <div className="overflow-hidden shadow-lg bg-white p-1.5 pb-4 rotate-2 group-hover:rotate-0 transition-transform duration-500">
-              <img src={images[1].src} alt={images[1].alt} className="w-full aspect-square object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-            </div>
-          </motion.div>
-
-          {/* Photo 3 - Center Large (Hero) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            onClick={() => setIndex(3)}
-            className="absolute top-[15%] left-[50%] transform -translate-x-1/2 w-[40%] md:w-[32%] cursor-pointer group z-30"
-          >
-            <div className="overflow-hidden shadow-2xl bg-white p-2 pb-6">
-              <img src={images[3].src} alt={images[3].alt} className="w-full aspect-[3/4] object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-            </div>
-          </motion.div>
-
-          {/* Photo 4 - Left Middle */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            onClick={() => setIndex(2)}
-            className="absolute top-[35%] left-[2%] w-[22%] md:w-[18%] cursor-pointer group z-10"
-          >
-            <div className="overflow-hidden shadow-md bg-white p-1.5 pb-3 -rotate-3 group-hover:rotate-0 transition-transform duration-500">
-              <img src={images[2].src} alt={images[2].alt} className="w-full aspect-[4/3] object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-            </div>
-          </motion.div>
-
-          {/* Photo 5 - Right Middle */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            onClick={() => setIndex(4)}
-            className="absolute top-[40%] right-[5%] w-[24%] md:w-[20%] cursor-pointer group z-20"
-          >
-            <div className="overflow-hidden shadow-lg bg-white p-1.5 pb-4 rotate-1 group-hover:rotate-0 transition-transform duration-500">
-              <img src={images[4].src} alt={images[4].alt} className="w-full aspect-[3/4] object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-            </div>
-          </motion.div>
-
-          {/* Photo 6 - Bottom Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            onClick={() => setIndex(5)}
-            className="absolute bottom-[15%] left-[15%] w-[26%] md:w-[22%] cursor-pointer group z-20"
-          >
-            <div className="overflow-hidden shadow-lg bg-white p-1.5 pb-4 rotate-2 group-hover:rotate-0 transition-transform duration-500">
-              <img src={images[5].src} alt={images[5].alt} className="w-full aspect-[4/3] object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-            </div>
-          </motion.div>
-
-          {/* Photo 7 - Bottom Center-Right */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            onClick={() => setIndex(6)}
-            className="absolute bottom-[10%] right-[20%] w-[28%] md:w-[24%] cursor-pointer group z-10"
-          >
-            <div className="overflow-hidden shadow-md bg-white p-1.5 pb-4 -rotate-1 group-hover:rotate-0 transition-transform duration-500">
-              <img src={images[6].src} alt={images[6].alt} className="w-full aspect-[4/5] object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-            </div>
-          </motion.div>
-
-          {/* Photo 8 - Bottom Right Small */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            onClick={() => setIndex(7)}
-            className="absolute bottom-[25%] right-[2%] w-[20%] md:w-[16%] cursor-pointer group z-10"
-          >
-            <div className="overflow-hidden shadow-md bg-white p-1 pb-3 rotate-3 group-hover:rotate-0 transition-transform duration-500">
-              <img src={images[7].src} alt={images[7].alt} className="w-full aspect-square object-cover grayscale-[40%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-            </div>
-          </motion.div>
-
-          {/* Photo 9 - Bottom Right Group */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            onClick={() => setIndex(8)}
-            className="absolute bottom-[5%] right-[35%] w-[22%] md:w-[18%] cursor-pointer group z-20"
-          >
-            <div className="overflow-hidden shadow-lg bg-white p-1.5 pb-4 -rotate-2 group-hover:rotate-0 transition-transform duration-500">
-              <img src={images[8].src} alt={images[8].alt} className="w-full aspect-[16/9] object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Footer Section - Typography Style from Reference */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end mb-12">
-          {/* Left Side - Big Typography */}
+        {/* ── Footer Typography ─────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end w-full mt-4">
           <div className="relative">
-            <h1 className="text-6xl md:text-8xl font-bold text-black leading-[0.85] tracking-tight">
-              <span className="block text-7xl md:text-9xl">M</span>
-              <span className="block -mt-2 md:-mt-4 ml-1 md:ml-2">emories in</span>
+            <h1 className="text-5xl md:text-8xl font-bold text-black leading-[0.85] tracking-tight">
+              <span className="block text-6xl md:text-9xl">M</span>
+              <span className="block -mt-1 md:-mt-4 ml-1 md:ml-2">emories in</span>
               <span className="block ml-1 md:ml-2">Mei</span>
             </h1>
-            <p className="mt-6 text-[10px] text-gray-500 tracking-widest uppercase font-medium">
+            <p className="mt-5 text-[9px] md:text-[10px] text-gray-500 tracking-widest uppercase font-medium">
               Archived by Raggen.
             </p>
           </div>
-
-          {/* Right Side - Description */}
           <div className="flex flex-col items-start md:items-end gap-4">
             <div className="max-w-xs">
-              <h3 className="text-lg font-semibold text-black mb-2 flex items-center gap-2">
-                Cerita bulan lalu
-                <ArrowUpRight className="w-4 h-4" />
-              </h3>
+              <h3 className="text-base md:text-lg font-semibold text-black mb-2">Cerita bulan lalu</h3>
               <p className="text-sm text-gray-600 leading-relaxed text-left md:text-right">
                 Cerita dan kenangan bulan Mei bakal memorable suatu saat nanti.
               </p>
               <p className="text-xs text-gray-500 mt-3 leading-relaxed text-left md:text-right">
-                mulai dari lebaran di Kotabaru, graduation, gabut bareng temen, hunting milkyway tapi gagal, hunting di Pagatan dan Banjarmasin.
+                mulai dari lebaran di Kotabaru, graduation, gabut bareng temen,
+                hunting milkyway tapi gagal, hunting di Pagatan dan Banjarmasin.
               </p>
             </div>
-
-            <button className="mt-4 p-3 border border-black/20 rounded-full hover:bg-black hover:text-white transition-all duration-300 group">
-              <Search className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
-            </button>
           </div>
         </div>
       </div>
 
-      {/* Lightbox */}
-      <Lightbox
-        open={index >= 0}
-        index={index}
-        close={() => setIndex(-1)}
-        slides={images.map(img => ({ src: img.src }))}
-        className="bg-white/95 backdrop-blur-sm"
-      />
+      {/* ── Lightbox ──────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {selectedIndex >= 0 && currentImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-white/96 backdrop-blur-md flex flex-col"
+            onClick={closeLightbox}
+          >
+            <button
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 md:top-6 md:right-6 z-50 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center transition-colors"
+            >
+              <X size={20} />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); goToPrevious(); }}
+              className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center transition-colors"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); goToNext(); }}
+              className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center transition-colors"
+            >
+              <ChevronRight size={20} />
+            </button>
+
+            <div
+              className="flex-1 flex items-center justify-center p-6 pb-36 md:pb-40"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <motion.img
+                key={selectedIndex}
+                src={currentImage.src}
+                alt={currentImage.alt}
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.25 }}
+                className="w-auto h-auto max-w-full max-h-[65vh] object-contain shadow-xl rounded-sm"
+              />
+            </div>
+
+            <motion.div
+              initial={{ y: 80 }}
+              animate={{ y: 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-5 py-4 md:px-8 md:py-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
+                <div className="min-w-0">
+                  <h3 className="text-base md:text-lg font-semibold text-black truncate">
+                    {currentImage.name}
+                  </h3>
+                  <p className="text-xs md:text-sm text-gray-500 mt-0.5">
+                    {currentImage.caption}
+                  </p>
+                </div>
+                <button
+                  onClick={() => toggleLike(selectedIndex)}
+                  className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                >
+                  <HeartIcon filled={likedImages.has(selectedIndex)} className="w-4 h-4 md:w-5 md:h-5" />
+                  <span className="text-xs md:text-sm font-medium text-gray-700">
+                    {likedImages.has(selectedIndex) ? 'Saved' : 'Save'}
+                  </span>
+                </button>
+              </div>
+              <div className="max-w-4xl mx-auto mt-3 flex items-center justify-between text-[10px] md:text-xs text-gray-400">
+                <span>{selectedIndex + 1} / {images.length}</span>
+                <div className="flex gap-4">
+                  <button onClick={goToPrevious} className="hover:text-black transition-colors">← Previous</button>
+                  <button onClick={goToNext} className="hover:text-black transition-colors">Next →</button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
-import herobg from '../assets/hero-bg.mp4';
+import { heroVideoPreset, IMAGE_NAMES } from '../config/cloudinary';
 
 const Hero = () => {
   const [loadingState, setLoadingState] = useState({
@@ -43,7 +43,7 @@ const Hero = () => {
     }
   }, [loadingState.video, loadingState.assets]);
 
-  const videoSource = isMobile ? "/hero-bg-mobile.mp4" : herobg;
+  const videoSource = heroVideoPreset(IMAGE_NAMES.HERO_VIDEO);
 
   // Split text for animation
   const brandName = "LUXE WEDDINGS";

@@ -1,16 +1,11 @@
 {
     "buildCommand": "npm run build",
-    "devCommand": "npm run dev",
-    "installCommand": "npm install",
-    "framework": "vite",
     "outputDirectory": "dist",
-    "public": true,
-    "cleanUrls": true,
-    "trailingSlash": false,
-    "rewrites": [
+    "framework": "vite",
+    "routes": [
         {
-            "source": "/(.*)",
-            "destination": "/index.html"
+            "src": "/.*",
+            "dest": "/index.html"
         }
     ]
 }
