@@ -8,21 +8,19 @@ const CLOUDINARY_CLOUD_NAME =
 
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com";
 
-const CLOUDINARY_FOLDER =
-  import.meta.env.VITE_CLOUDINARY_FOLDER || "wedding-portfolio";
+const CLOUDINARY_FOLDER ="";
+
 
 /**
  * Image & Video Public IDs / URLs
  */
 export const IMAGE_NAMES = {
   // Hero Section
-  HERO_VIDEO:
-    "https://res.cloudinary.com/ddyh4pftg/video/upload/q_auto/f_auto/v1776522361/Wedding_Highlight_Final_online-video-cutter.com_belt9v.mp4",
-
+  HERO_VIDEO: "Wedding_Highlight_Final_online-video-cutter.com_belt9v",
   HERO_VIDEO_MOBILE: "hero-background-mobile",
 
   // About Section
-  ABOUT_STUDIO_VIDEO: "https://res.cloudinary.com/ddyh4pftg/video/upload/q_auto/f_auto/v1776542448/studio-team_amw9rj.mp4",
+  ABOUT_STUDIO_VIDEO: "studio-team_amw9rj",
 
   // Gallery Section
   GALLERY_WEDDINGS: "gallery-weddings",
@@ -45,7 +43,7 @@ export const IMAGE_NAMES = {
   TESTIMONIAL_ANANYA_SIDDHARTH: "testimonial-ananya-siddharth",
   TESTIMONIAL_RIYA_KARAN: "testimonial-riya-karan",
 
-  // Masonry Grid
+  // Masonry Grid (keep full URLs if you want)
   MASONRY_WEDDING_MOMENT: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776522535/_DEE0045_kep8fh.jpg",
   MASONRY_COUPLE: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776522484/Dee_Photography9356300456155of207_spswwy.jpg",
   MASONRY_HANDS: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776522551/DSC08154_1_l3csgq.jpg",
@@ -64,35 +62,29 @@ export const IMAGE_NAMES = {
   MASONRY_GROUP7: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776540144/IMG-20251121-WA0013_xjsu3q.jpg",
   MASONRY_GROUP8: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776540144/IMG-20251121-WA0012_zljgec.jpg",
   MASONRY_GROUP9: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776540144/IMG-20251121-WA0001_mrsdh9.jpg",
-
-  
-  
 };
 
 /**
- * Utility: Check if URL is already full Cloudinary URL
+ * Utils
  */
-const isFullUrl = (url) => typeof url === "string" && url.startsWith("http");
+const isFullUrl = (url) =>
+  typeof url === "string" && url.startsWith("http");
 
-/**
- * Utility: Basic validation
- */
 const validateInput = (name, type = "asset") => {
   if (!name || typeof name !== "string") {
-    console.warn(`⚠️ Invalid ${type} name provided:`, name);
+    console.warn(`⚠️ Invalid ${type} name:`, name);
     return false;
   }
   return true;
 };
 
 /**
- * Build Cloudinary Image URL
+ * ✅ IMAGE BUILDER (FIXED)
  */
 export const buildCloudinaryImageUrl = (imageName, options = {}) => {
   try {
     if (!validateInput(imageName, "image")) return "";
 
-    // If already full URL → return directly
     if (isFullUrl(imageName)) return imageName;
 
     const {
@@ -108,7 +100,7 @@ export const buildCloudinaryImageUrl = (imageName, options = {}) => {
       height !== "auto" && `h_${height}`,
       `c_${crop}`,
       `q_${quality}`,
-      `f_${format}`, // ✅ fixed (removed wrong fetch_format)
+      `f_${format}`,
     ]
       .filter(Boolean)
       .join(",");
@@ -116,20 +108,19 @@ export const buildCloudinaryImageUrl = (imageName, options = {}) => {
     const transformPath = transforms ? `${transforms}/` : "";
 
     return `${CLOUDINARY_BASE_URL}/${CLOUDINARY_CLOUD_NAME}/image/upload/${transformPath}${CLOUDINARY_FOLDER}/${imageName}`;
-  } catch (error) {
-    console.error("❌ Error building image URL:", error);
+  } catch (err) {
+    console.error("❌ Image URL Error:", err);
     return "";
   }
 };
 
 /**
- * Build Cloudinary Video URL
+ * ✅ VIDEO BUILDER (WITH STREAMING SUPPORT)
  */
 export const buildCloudinaryVideoUrl = (videoName, options = {}) => {
   try {
     if (!validateInput(videoName, "video")) return "";
 
-    // If already full URL → return directly
     if (isFullUrl(videoName)) return videoName;
 
     const {
@@ -137,6 +128,7 @@ export const buildCloudinaryVideoUrl = (videoName, options = {}) => {
       height = "auto",
       quality = "auto",
       video_codec = "auto",
+      streaming = false,
     } = options;
 
     const transforms = [
@@ -144,21 +136,23 @@ export const buildCloudinaryVideoUrl = (videoName, options = {}) => {
       height !== "auto" && `h_${height}`,
       `q_${quality}`,
       `vc_${video_codec}`,
+      streaming && "sp_auto",
     ]
       .filter(Boolean)
       .join(",");
 
     const transformPath = transforms ? `${transforms}/` : "";
+    const format = streaming ? ".m3u8" : ".mp4";
 
-    return `${CLOUDINARY_BASE_URL}/${CLOUDINARY_CLOUD_NAME}/video/upload/${transformPath}${CLOUDINARY_FOLDER}/${videoName}`;
-  } catch (error) {
-    console.error("❌ Error building video URL:", error);
+    return `${CLOUDINARY_BASE_URL}/${CLOUDINARY_CLOUD_NAME}/video/upload/${transformPath}${CLOUDINARY_FOLDER}/${videoName}${format}`;
+  } catch (err) {
+    console.error("❌ Video URL Error:", err);
     return "";
   }
 };
 
 /**
- * Presets
+ * 🎬 PRESETS
  */
 
 // Hero Video
@@ -166,7 +160,8 @@ export const heroVideoPreset = (videoName) =>
   buildCloudinaryVideoUrl(videoName, {
     width: 1920,
     height: 1080,
-    quality: "auto:low", // faster loading
+    quality: "auto:low",
+    streaming: false, // ⚠️ keep false unless using Video.js
   });
 
 // Gallery Images
@@ -174,7 +169,6 @@ export const galleryImagePreset = (imageName) =>
   buildCloudinaryImageUrl(imageName, {
     width: 800,
     height: 600,
-    quality: "auto",
   });
 
 // Testimonial Avatar
@@ -183,7 +177,6 @@ export const testimonialPreset = (imageName) =>
     width: 96,
     height: 96,
     crop: "thumb",
-    quality: "auto",
   });
 
 // Masonry Grid
@@ -207,6 +200,5 @@ export const masonryPreset = (imageName, aspectRatio = "4/5") => {
   return buildCloudinaryImageUrl(imageName, {
     width: 500,
     height,
-    quality: "auto",
   });
 };

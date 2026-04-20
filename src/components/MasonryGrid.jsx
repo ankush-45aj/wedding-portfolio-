@@ -257,9 +257,8 @@ const ScatteredGrid = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end w-full mt-4">
           <div className="relative">
             <h1 className="text-5xl md:text-8xl font-bold text-black leading-[0.85] tracking-tight">
-              <span className="block text-6xl md:text-9xl">M</span>
-              <span className="block -mt-1 md:-mt-4 ml-1 md:ml-2">emories in</span>
-              <span className="block ml-1 md:ml-2">Mei</span>
+              <span className="block text-6xl md:text-9xl">न</span>
+              <span className="block -mt-1 md:-mt-4 ml-1 md:ml-2">जराणा</span>
             </h1>
             <p className="mt-5 text-[9px] md:text-[10px] text-gray-500 tracking-widest uppercase font-medium">
               Archived by Raggen.
@@ -267,13 +266,13 @@ const ScatteredGrid = () => {
           </div>
           <div className="flex flex-col items-start md:items-end gap-4">
             <div className="max-w-xs">
-              <h3 className="text-base md:text-lg font-semibold text-black mb-2">Cerita bulan lalu</h3>
+              <h3 className="text-base md:text-lg font-semibold text-black mb-2">जीवनाचे रंग</h3>
               <p className="text-sm text-gray-600 leading-relaxed text-left md:text-right">
-                Cerita dan kenangan bulan Mei bakal memorable suatu saat nanti.
+                जेव्हा शब्द अपुरे पडतात, तेव्हा चित्र बोलू लागतात.
               </p>
               <p className="text-xs text-gray-500 mt-3 leading-relaxed text-left md:text-right">
-                mulai dari lebaran di Kotabaru, graduation, gabut bareng temen,
-                hunting milkyway tapi gagal, hunting di Pagatan dan Banjarmasin.
+                हे आहेत ते क्षण जे काळालाही विसरता येत नाहीत —
+                एक महिना, अनेक emotions, अनंत आठवणी.
               </p>
             </div>
           </div>
