@@ -43,17 +43,17 @@
 
 .wedding-text h2 {
   font-size: clamp(28px, 5vw, 56px);
-  color: #fff;
+  color: var(--color-textMain, #2C2C2C);
   letter-spacing: 4px;
   text-transform: uppercase;
   font-family: "Lato", sans-serif;
   font-weight: 400;
   line-height: 1.2;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .wedding-textbg {
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: rgba(255, 255, 255, 0.6);
   padding: 12px 28px;
   border-radius: 4px;
   display: inline-block;
@@ -68,7 +68,7 @@
     height: auto;
     min-height: 70vh;
     /* Dark background so side bars look intentional */
-    background-color: #0f0f0f;
+    background-color: #FAF9F6;
   }
 
   .parallax-img {

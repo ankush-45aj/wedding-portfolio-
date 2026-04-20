@@ -11,7 +11,7 @@ const categories = [
 
 const Gallery = () => {
   return (
-    <section className="py-24 bg-beige" id="categories">
+    <section className="py-24 bg-primary" id="categories">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif text-olive mb-4">Our Expertise</h2>
@@ -40,8 +40,8 @@ const Gallery = () => {
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                <h3 className="text-2xl font-serif text-beige mb-2">{cat.title}</h3>
-                <span className="inline-block w-8 h-[1px] bg-gold transition-all duration-500 group-hover:w-16"></span>
+                <h3 className="text-2xl font-serif text-textMain mb-2">{cat.title}</h3>
+                <span className="inline-block w-8 h-[1px] bg-accent transition-all duration-500 group-hover:w-16"></span>
               </div>
             </motion.div>
           ))}

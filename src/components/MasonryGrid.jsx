@@ -175,7 +175,7 @@ const ScatteredGrid = () => {
 
   return (
     <section
-      className="min-h-screen bg-[#f8f5f2] selection:bg-black selection:text-white"
+      className="min-h-screen bg-[#f8f5f2] selection:bg-black selection:text-textMain"
       style={{ fontFamily: "'Georgia', serif" }}
     >
       <div className="max-w-4xl mx-auto px-4 py-10 md:py-16 flex flex-col items-center">

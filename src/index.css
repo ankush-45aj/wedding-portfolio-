@@ -9,7 +9,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-beige text-dark font-sans antialiased;
+    @apply bg-primary text-textMain font-sans antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;

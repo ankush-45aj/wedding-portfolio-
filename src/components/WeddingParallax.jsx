@@ -17,7 +17,7 @@ const WeddingParallax = () => {
                 <h2>
                     <span className="wedding-textbg">Groom & Bride</span>
                 </h2>
-                <p className="mt-4 text-white/80 text-xs tracking-[0.3em] uppercase">
+                <p className="mt-4 text-textMain/80 text-xs tracking-[0.3em] uppercase">
                     A Forever Kind of Love
                 </p>
             </div>

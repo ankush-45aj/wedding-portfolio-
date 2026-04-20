@@ -31,9 +31,9 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-beige relative overflow-hidden" id="testimonials">
+    <section className="py-24 bg-primary relative overflow-hidden" id="testimonials">
       <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-        <h2 className="text-4xl md:text-5xl font-serif text-olive mb-12">Words of Love</h2>
+        <h2 className="text-4xl md:text-5xl font-serif text-accent mb-12">Words of Love</h2>
 
         <Swiper
           modules={[Pagination, Autoplay]}
@@ -46,19 +46,19 @@ const Testimonials = () => {
           {testimonials.map((t) => (
             <SwiperSlide key={t.id}>
               <div className="flex flex-col items-center">
-                <div className="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-gold">
+                <div className="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-accent">
                   <img
                     src={t.image}
                     alt={t.name}
                     data-name={t.dataName}
                     className="w-full h-full object-cover"
-                    style={{ backgroundColor: '#C8B6A6' }}
+                    style={{ backgroundColor: '#F5F0E6' }}
                   />
                 </div>
-                <p className="text-lg md:text-2xl font-serif text-dark italic leading-relaxed mb-6">
+                <p className="text-lg md:text-2xl font-serif text-textMain italic leading-relaxed mb-6">
                   "{t.text}"
                 </p>
-                <div className="text-sm uppercase tracking-widest text-brown font-medium">
+                <div className="text-sm uppercase tracking-widest text-accent font-medium">
                   {t.name}
                 </div>
               </div>
@@ -68,7 +68,7 @@ const Testimonials = () => {
       </div>
 
       {/* Decorative quotes background */}
-      <div className="absolute top-10 left-10 text-[200px] text-brown opacity-5 font-serif leading-none select-none">"</div>
+      <div className="absolute top-10 left-10 text-[200px] text-accent opacity-5 font-serif leading-none select-none">"</div>
     </section>
   );
 };

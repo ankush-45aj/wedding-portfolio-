@@ -28,11 +28,11 @@ const videos = [
 
 const VideoSection = () => {
   return (
-    <section className="py-24 bg-dark text-beige" id="films">
+    <section className="py-24 bg-secondary text-textMain" id="films">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-gold mb-4">Cinematic Films</h2>
-          <p className="text-beige/70 tracking-widest uppercase text-sm">Relive the magic</p>
+          <h2 className="text-4xl md:text-5xl font-serif text-accent mb-4">Cinematic Films</h2>
+          <p className="text-textMain/70 tracking-widest uppercase text-sm">Relive the magic</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -43,7 +43,7 @@ const VideoSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.2 }}
-              className="relative aspect-video bg-olive rounded-sm overflow-hidden group cursor-pointer"
+              className="relative aspect-video bg-primary rounded-sm overflow-hidden group cursor-pointer"
             >
               <video
                 src={vid.url}
@@ -52,31 +52,31 @@ const VideoSection = () => {
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-contain bg-white transition-transform duration-700 group-hover:scale-105"
                 onMouseEnter={(e) => e.target.play().catch(() => { })}
                 onMouseLeave={(e) => {
                   e.target.pause();
                   e.target.currentTime = 0;
                 }}
               />
-              <div className="absolute inset-0 bg-dark/40 group-hover:bg-dark/10 transition-colors duration-500 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none"></div>
 
               {/* Play Button Overlay */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div className="w-16 h-16 rounded-full border-2 border-gold flex items-center justify-center bg-dark/50 backdrop-blur-sm">
-                  <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[12px] border-l-gold border-b-[8px] border-b-transparent ml-1"></div>
+                <div className="w-16 h-16 rounded-full border-2 border-accent flex items-center justify-center bg-white/50 backdrop-blur-sm">
+                  <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[12px] border-l-accent border-b-[8px] border-b-transparent ml-1"></div>
                 </div>
               </div>
 
               <div className="absolute bottom-6 left-6 pointer-events-none">
-                <h3 className="text-xl font-serif text-light shadow-sm">{vid.title}</h3>
+                <h3 className="text-xl font-serif text-textMain shadow-sm">{vid.title}</h3>
               </div>
             </motion.div>
           ))}
         </div>
 
         <div className="mt-16 text-center">
-          <a href="#" className="inline-block px-10 py-4 bg-transparent border border-gold text-gold hover:bg-gold hover:text-dark transition-colors duration-300 uppercase tracking-widest text-sm font-medium">
+          <a href="#" className="inline-block px-10 py-4 bg-white border border-accent/10 text-accent hover:bg-accent hover:text-textMain transition-colors duration-300 uppercase tracking-widest text-sm font-medium">
             Watch More Films
           </a>
         </div>
