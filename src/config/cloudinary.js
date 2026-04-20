@@ -15,9 +15,8 @@ const CLOUDINARY_FOLDER ="";
  * Image & Video Public IDs / URLs
  */
 export const IMAGE_NAMES = {
-  // Hero Section
   HERO_VIDEO: "Wedding_Highlight_Final_online-video-cutter.com_belt9v",
-  HERO_VIDEO_MOBILE: "hero-background-mobile",
+  HERO_VIDEO_MOBILE: "mobile-hero-bg_pioych",
 
   // About Section
   ABOUT_STUDIO_VIDEO: "studio-team_amw9rj",

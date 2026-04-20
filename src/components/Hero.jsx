@@ -13,7 +13,6 @@ const Hero = () => {
   const progressInterval = useRef(null);
 
   useEffect(() => {
-    // Simulate asset loading progress for "real" load balancer feel
     progressInterval.current = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -25,15 +24,26 @@ const Hero = () => {
       });
     }, 150);
 
-    // Mobile detection
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-
     return () => {
-      window.removeEventListener('resize', checkMobile);
       if (progressInterval.current) clearInterval(progressInterval.current);
     };
+  }, []);
+
+  // Mobile detection
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+
+    checkMobile();
+
+    let timeout;
+    const handleResize = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(checkMobile, 150);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // When video and assets both ready, trigger exit
@@ -43,7 +53,9 @@ const Hero = () => {
     }
   }, [loadingState.video, loadingState.assets]);
 
-  const videoSource = heroVideoPreset(IMAGE_NAMES.HERO_VIDEO);
+  const videoSource = heroVideoPreset(
+    isMobile ? IMAGE_NAMES.HERO_VIDEO_MOBILE : IMAGE_NAMES.HERO_VIDEO
+  );
 
   // Split text for animation
   const brandName = "LUXE WEDDINGS";
@@ -201,7 +213,8 @@ const Hero = () => {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
+              poster="/fallback.jpg"
               onCanPlayThrough={() => setLoadingState(s => ({ ...s, video: true }))}
               onLoadedData={() => setLoadingState(s => ({ ...s, video: true }))}
               onError={() => setLoadingState(s => ({ ...s, video: true }))}
@@ -285,6 +298,6 @@ const Hero = () => {
       </section>
     </>
   );
-};
+}
 
 export default Hero;

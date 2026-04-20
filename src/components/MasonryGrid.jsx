@@ -100,9 +100,13 @@ const GRID_ROWS = 7;
 
 // ─── Responsive unit size ────────────────────────────────────────────────────
 const getUnit = (width) => {
-  if (width < 400) return { unit: 38, gap: 3 }; // Mobile
-  if (width < 768) return { unit: 50, gap: 4 }; // Tablet
-  return { unit: 75, gap: 5 };                  // Desktop
+  if (width < 360) return { unit: 35, gap: 3 };      // very small phones
+  else if (width < 400) return { unit: 45, gap: 3 }; // small phones
+  else if (width < 480) return { unit: 50, gap: 4 }; // large phones
+  else if (width < 640) return { unit: 65, gap: 4 }; // phablets
+  else if (width < 768) return { unit: 70, gap: 5 }; // tablets
+  else if (width < 1024) return { unit: 80, gap: 5 }; // small laptops
+  else return { unit: 90, gap: 6 }; // desktop
 };
 // ─── Decorative heart SVG ────────────────────────────────────────────────────
 const HeartDeco = ({ size = 40, opacity = 0.85 }) => (
