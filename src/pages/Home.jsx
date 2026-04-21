@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Gallery from '../components/Gallery';
 import AboutSection from '../components/AboutSection';
@@ -16,6 +17,11 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Elegant Wedding Photography</title>
+        <meta name="description" content="Capture your special day with our elegant and timeless wedding photography. View our portfolio, read testimonials, and book our services." />
+        <link rel="canonical" href="/" />
+      </Helmet>
       <Hero />
       <Gallery />
       <AboutSection />

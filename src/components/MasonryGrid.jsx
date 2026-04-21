@@ -260,10 +260,10 @@ const ScatteredGrid = () => {
         {/* ── Footer Typography ─────────────────────────────────────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end w-full mt-4">
           <div className="relative">
-            <h1 className="text-5xl md:text-8xl font-bold text-black leading-[0.85] tracking-tight">
+            <h2 className="text-5xl md:text-8xl font-bold text-black leading-[0.85] tracking-tight">
               <span className="block text-6xl md:text-9xl">न</span>
               <span className="block -mt-1 md:-mt-4 ml-1 md:ml-2">जराणा</span>
-            </h1>
+            </h2>
             <p className="mt-5 text-[9px] md:text-[10px] text-gray-500 tracking-widest uppercase font-medium">
               Archived by Raggen.
             </p>
