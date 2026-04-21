@@ -12,9 +12,23 @@ const Portfolio = () => {
   return (
     <div className="pt-24 bg-light min-h-screen">
       <Helmet>
-        <title>Portfolio | Elegant Wedding Photography</title>
+        <title>Our Wedding Portfolio | Elegant Photography &amp; Films</title>
         <meta name="description" content="View our curated collection of elegant wedding photography. Our portfolio showcases beautiful, romantic, and timeless moments captured in high quality." />
-        <link rel="canonical" href="/portfolio" />
+        <link rel="canonical" href="https://wedding-portfolio-beta.vercel.app/portfolio" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://wedding-portfolio-beta.vercel.app/portfolio" />
+        <meta property="og:title" content="Our Wedding Portfolio | Elegant Photography &amp; Films" />
+        <meta property="og:description" content="View our curated collection of elegant wedding photography. Our portfolio showcases beautiful, romantic, and timeless moments captured in high quality." />
+        <meta property="og:image" content="https://wedding-portfolio-beta.vercel.app/fallback.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://wedding-portfolio-beta.vercel.app/portfolio" />
+        <meta name="twitter:title" content="Our Wedding Portfolio | Elegant Photography &amp; Films" />
+        <meta name="twitter:description" content="View our curated collection of elegant wedding photography. Our portfolio showcases beautiful, romantic, and timeless moments captured in high quality." />
+        <meta name="twitter:image" content="https://wedding-portfolio-beta.vercel.app/fallback.jpg" />
       </Helmet>
       {/* Header */}
       <div className="text-center py-16 text-olive border-b border-beige">

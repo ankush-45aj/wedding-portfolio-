@@ -48,17 +48,26 @@ const Footer = () => {
               <span>info@studioname.com</span>
             </li>
             <li className="flex items-center gap-3">
-              <MapPin size={18} className="text-accent" />
-              <span>Mumbai, India</span>
+              <MapPin size={18} className="text-accent min-w-[18px]" />
+              <span>123 Wedding Avenue, Bandra West, Mumbai, Maharashtra 400050, India</span>
             </li>
           </ul>
           
-          <div className="flex gap-4 mt-6">
-            <a href="#" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors">
+          <div className="flex gap-4 mt-6 flex-wrap">
+            <a href="https://www.facebook.com/yourprofile" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="Facebook">
+              <span className="font-bold text-textMain text-sm">FB</span>
+            </a>
+            <a href="https://twitter.com/yourprofile" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="Twitter">
+              <span className="font-bold text-textMain text-sm">X</span>
+            </a>
+            <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="Instagram">
               <Camera size={20} className="text-textMain" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors">
-              <span className="font-bold text-textMain text-sm">WA</span>
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="LinkedIn">
+              <span className="font-bold text-textMain text-sm">IN</span>
+            </a>
+            <a href="https://www.youtube.com/channel/yourchannel" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="YouTube">
+              <span className="font-bold text-textMain text-sm">YT</span>
             </a>
           </div>
         </div>
