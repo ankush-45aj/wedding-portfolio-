@@ -8,7 +8,9 @@ const CLOUDINARY_CLOUD_NAME =
 
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com";
 
-const CLOUDINARY_FOLDER ="";
+const CLOUDINARY_FOLDER = ""; // Leave empty if using direct photo names
+const CLOUDINARY_VERSION = "v1780212545"; // Version ID from Cloudinary
+const IMAGE_EXTENSION = ".jpg"; // Default extension for masonry images
 
 
 /**
@@ -22,10 +24,10 @@ export const IMAGE_NAMES = {
   ABOUT_STUDIO_VIDEO: "studio-team_amw9rj",
 
   // Gallery Section
-  GALLERY_WEDDINGS: "gallery-weddings",
+  GALLERY_WEDDINGS: "weddings-gallery",
   GALLERY_PRE_WEDDING: "gallery-pre-wedding",
-  GALLERY_EVENTS: "gallery-events",
-  GALLERY_CINEMATIC: "gallery-cinematic-films",
+  GALLERY_EVENTS: "gallery_events",
+  GALLERY_CINEMATIC: "cinematic_films",
 
   // Video Section
   VIDEO_ADITI_RAHUL: "video-aditi-rahul",
@@ -43,24 +45,41 @@ export const IMAGE_NAMES = {
   TESTIMONIAL_RIYA_KARAN: "testimonial-riya-karan",
 
   // Masonry Grid (keep full URLs if you want)
-  MASONRY_WEDDING_MOMENT: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776522535/_DEE0045_kep8fh.jpg",
-  MASONRY_COUPLE: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776522484/Dee_Photography9356300456155of207_spswwy.jpg",
-  MASONRY_HANDS: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776522551/DSC08154_1_l3csgq.jpg",
-  MASONRY_PHOTOGRAPHER: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776522554/DSC08070_bfwaa7.jpg",
-  MASONRY_VENUE: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776522535/_DEE0022_nwi6um.jpg",
-  MASONRY_CELEBRATION: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776522494/Dee_Photography9356300456137of207_kbtols.jpg",
-  MASONRY_FLOWERS: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776524062/IMG-20251121-WA0006_zr1hhy.jpg",
-  MASONRY_FRIENDS: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776524074/IMG-20251121-WA0005_myr3yh.jpg",
-  MASONRY_GROUP: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776540157/IMG-20251121-WA0018_rj1mxe.jpg",
-  MASONRY_GROUP1: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776524093/IMG-20251121-WA0003_v5ioey.jpg",
-  MASONRY_GROUP2: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776540145/IMG-20251121-WA0005_1_h0loul.jpg",
-  MASONRY_GROUP3: "https://res.cloudinary.com/ddyh4pftg/image/upload/q_auto/f_auto/v1776540145/IMG-20251121-WA0003_1_ps0dga.jpg",
-  MASONRY_GROUP4: "https://res.cloudinary.com/ddyh4pftg/image/upload/q_auto/f_auto/v1776540145/IMG-20251121-WA0014_ydc4ou.jpg",
-  MASONRY_GROUP5: "https://res.cloudinary.com/ddyh4pftg/image/upload/q_auto/f_auto/v1776540145/IMG-20251121-WA0011_uyg4jh.jpg   ",
-  MASONRY_GROUP6: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776540144/IMG-20251121-WA0009_ewaciu.jpg",
-  MASONRY_GROUP7: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776540144/IMG-20251121-WA0013_xjsu3q.jpg",
-  MASONRY_GROUP8: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776540144/IMG-20251121-WA0012_zljgec.jpg",
-  MASONRY_GROUP9: "https://res.cloudinary.com/ddyh4pftg/image/upload/v1776540144/IMG-20251121-WA0001_mrsdh9.jpg",
+ MASONRY_WEDDING_MOMENT: "photo1",
+
+  MASONRY_COUPLE: "photo2",
+
+  MASONRY_HANDS: "photo3",
+
+  MASONRY_PHOTOGRAPHER: "photo4",
+
+  MASONRY_VENUE: "photo5",
+
+  MASONRY_CELEBRATION: "photo6",
+
+  MASONRY_FLOWERS: "photo7",
+
+  MASONRY_FRIENDS: "photo8",
+
+  MASONRY_GROUP: "photo9",
+
+  MASONRY_GROUP1: "photo10",
+
+  MASONRY_GROUP2: "photo11",
+
+  MASONRY_GROUP3: "photo12",
+
+  MASONRY_GROUP4: "photo13",
+
+  MASONRY_GROUP5: "photo14",
+
+  MASONRY_GROUP6: "photo15",
+
+  MASONRY_GROUP7: "photo16",
+
+  MASONRY_GROUP8: "photo17",
+
+  MASONRY_GROUP9: "photo19",
 };
 
 /**
@@ -105,8 +124,12 @@ export const buildCloudinaryImageUrl = (imageName, options = {}) => {
       .join(",");
 
     const transformPath = transforms ? `${transforms}/` : "";
+    
+    // Include version ID and file extension
+    const versionPath = CLOUDINARY_VERSION ? `${CLOUDINARY_VERSION}/` : "";
+    const fileName = imageName.endsWith(IMAGE_EXTENSION) ? imageName : `${imageName}${IMAGE_EXTENSION}`;
 
-    return `${CLOUDINARY_BASE_URL}/${CLOUDINARY_CLOUD_NAME}/image/upload/${transformPath}${CLOUDINARY_FOLDER}/${imageName}`;
+    return `${CLOUDINARY_BASE_URL}/${CLOUDINARY_CLOUD_NAME}/image/upload/${transformPath}${versionPath}${fileName}`;
   } catch (err) {
     console.error("❌ Image URL Error:", err);
     return "";

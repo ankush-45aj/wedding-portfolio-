@@ -51,6 +51,7 @@ const Testimonials = () => {
                     src={t.image}
                     alt={t.name}
                     data-name={t.dataName}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                     style={{ backgroundColor: '#F5F0E6' }}
                   />

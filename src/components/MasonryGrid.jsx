@@ -3,9 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { masonryPreset, IMAGE_NAMES } from '../config/cloudinary';
 
-// ─── Images: exactly 9 ───────────────────────────────────────────────────────
+// ─── Images: exactly 17 ──────────────────────────────────────────────────────
 const images = [
-  // { src: masonryPreset(IMAGE_NAMES.MASONRY_WEDDING_MOMENT, '1/1'), alt: 'Wedding moment', name: 'Wedding Moment', caption: 'The moment we said forever' },
   { src: masonryPreset(IMAGE_NAMES.MASONRY_COUPLE, '4/3'), alt: 'Couple', name: 'Couple Portrait', caption: 'Just us against the world' },
   { src: masonryPreset(IMAGE_NAMES.MASONRY_HANDS, '1/1'), alt: 'Hands', name: 'Wedding Hands', caption: 'Holding hands, holding hearts' },
   { src: masonryPreset(IMAGE_NAMES.MASONRY_PHOTOGRAPHER, '4/5'), alt: 'Photographer', name: 'Behind the Scenes', caption: 'Capturing memories in the making' },
@@ -23,8 +22,6 @@ const images = [
   { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP6, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
   { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP7, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
   { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP8, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' }
-
-
 ];
 
 // ─── Heart layout on a 9-col × 7-row grid ────────────────────────────────────
@@ -106,7 +103,7 @@ const getUnit = (width) => {
   else if (width < 640) return { unit: 65, gap: 4 }; // phablets
   else if (width < 768) return { unit: 70, gap: 5 }; // tablets
   else if (width < 1024) return { unit: 80, gap: 5 }; // small laptops
-  else return { unit: 90, gap: 6 }; // desktop
+  else return { unit: 90, gap: 6 }; // desktop=
 };
 // ─── Decorative heart SVG ────────────────────────────────────────────────────
 const HeartDeco = ({ size = 40, opacity = 0.85 }) => (
@@ -143,6 +140,11 @@ const ScatteredGrid = () => {
   useEffect(() => {
     const onResize = () => setWinWidth(window.innerWidth);
     window.addEventListener('resize', onResize);
+    // Debug: Verify all images are loaded
+    console.log(`🖼️ MasonryGrid: ${images.length} images loaded, ${HEART_LAYOUT.length} layout positions`);
+    images.forEach((img, idx) => {
+      if (!img.src) console.warn(`⚠️ Image ${idx} missing src:`, img);
+    });
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
@@ -237,6 +239,12 @@ const ScatteredGrid = () => {
                   <img
                     src={image.src}
                     alt={image.alt}
+                    loading="lazy"
+                    onError={(e) => {
+                      console.warn(`⚠️ Image failed to load (${cellIdx}):`, image.src);
+                      e.target.style.backgroundColor = '#f0f0f0';
+                      e.target.textContent = '❌ Image not found';
+                    }}
                     className="w-full h-full object-cover transition-all duration-500 grayscale-[20%] group-hover:grayscale-0"
                   />
                   <button

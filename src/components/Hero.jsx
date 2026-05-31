@@ -58,8 +58,8 @@ const Hero = () => {
   );
 
   // Split text for animation
-  const brandName = "LUXE WEDDINGS";
-  const subtitle = "Cinematic Storytelling";
+  const brandName = "DEE PHOTOGRAPHY";
+  const subtitle = "Present Its Cinematic world";
 
   return (
     <>
@@ -232,9 +232,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.3, ease: [0.76, 0, 0.24, 1] }}
             className="mb-4"
           >
-            <span className="text-accent text-xs md:text-sm tracking-[0.5em] uppercase block mb-6">
-              Est. 2024
-            </span>
+
           </motion.div>
 
           <motion.h1
@@ -264,13 +262,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 1 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
-            <a
-              href="#portfolio"
-              className="group relative px-10 py-4 overflow-hidden border border-accent text-accent transition-all duration-500 uppercase tracking-[0.3em] text-xs font-medium hover:text-white"
-            >
-              <span className="absolute inset-0 w-0 bg-accent transition-all duration-500 ease-out group-hover:w-full" />
-              <span className="relative z-10">View Portfolio</span>
-            </a>
+
 
             <a
               href="#book"
