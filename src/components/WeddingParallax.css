@@ -61,14 +61,13 @@
 }
 
 /* =========================================
-   📱 MOBILE — FULL IMAGE VISIBLE
+   📱 MOBILE — PARALLAX ENABLED WITH TALL IMAGE
    ========================================= */
 @media (max-width: 768px) {
   .parallax-wrapper {
-    height: auto;
-    min-height: 70vh;
-    /* Dark background so side bars look intentional */
-    background-color: #FAF9F6;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
   }
 
   .parallax-img {
@@ -77,10 +76,17 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    /* KEY FIX: contain = full image visible */
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    z-index: -1;
+  }
+
+  .wedding-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .wedding-text h2 {
@@ -90,5 +96,6 @@
 
   .wedding-textbg {
     padding: 10px 16px;
+    font-size: 14px;
   }
 }

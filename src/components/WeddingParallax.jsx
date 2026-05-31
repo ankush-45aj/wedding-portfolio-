@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './WeddingParallax.css';
 
 const WeddingParallax = () => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Different images for mobile and desktop
+    const mobileImage = 'https://res.cloudinary.com/ddyh4pftg/image/upload/v1780212545/photo2.jpg'; // Tall image for mobile
+    const desktopImage = 'https://images.pexels.com/photos/27876531/pexels-photo-27876531.jpeg'; // Wide image for desktop
+
+    const parallaxImage = isMobile ? mobileImage : desktopImage;
+
     return (
         <section className="parallax-wrapper">
-            {/* Background — replace with your 4K groom & bride image */}
+            {/* Background — different images for mobile/desktop, parallax on both */}
             <div
                 className="parallax-img"
                 style={{
-                    backgroundImage: `url('https://images.pexels.com/photos/27876531/pexels-photo-27876531.jpeg')`,
+                    backgroundImage: `url('${parallaxImage}')`,
                 }}
             />
 
