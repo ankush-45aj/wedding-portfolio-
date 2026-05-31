@@ -61,40 +61,6 @@
 @media (max-width: 768px) {
 
   .parallax-wrapper {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .parallax-img {
-    position: absolute;
-    left: 0;
-    top: -20%;
-    width: 100%;
-    height: 140%;
-    background-size: cover;
-    background-position: center;
-    /* REMOVED: transform: translateY(0); */
-    will-change: transform;
-    z-index: 1;
-  }
-
-  .wedding-text {
-    width: 90%;
-    z-index: 2;
-  }
-
-  .wedding-text h2 {
-    font-size: clamp(24px, 7vw, 34px);
-    letter-spacing: 2px;
-  }
-
-  .wedding-textbg {
-    padding: 14px 24px;
-  }
-
-  .subtitle {
-    font-size: 11px;
-    letter-spacing: 0.25em;
+    display: none;
   }
 }

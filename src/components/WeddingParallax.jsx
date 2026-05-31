@@ -17,9 +17,9 @@ const WeddingParallax = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    /* ---------- MOBILE PARALLAX ---------- */
+    /* ---------- DESKTOP PARALLAX ---------- */
     useEffect(() => {
-        if (!isMobile) return;
+        if (isMobile) return;
 
         let rafId = null;
 
@@ -63,21 +63,20 @@ const WeddingParallax = () => {
         };
     }, [isMobile]);
 
-    const mobileImage =
-        "https://res.cloudinary.com/ddyh4pftg/image/upload/v1780212545/photo2.jpg";
-
     const desktopImage =
         "https://images.pexels.com/photos/27876531/pexels-photo-27876531.jpeg";
 
     return (
         <section ref={wrapperRef} className="parallax-wrapper">
-            <div
-                ref={imgRef}
-                className="parallax-img"
-                style={{
-                    backgroundImage: `url(${isMobile ? mobileImage : desktopImage})`,
-                }}
-            />
+            {!isMobile && (
+                <div
+                    ref={imgRef}
+                    className="parallax-img"
+                    style={{
+                        backgroundImage: `url(${desktopImage})`,
+                    }}
+                />
+            )}
 
             <div className="wedding-text">
                 <h2>
