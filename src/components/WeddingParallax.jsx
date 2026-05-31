@@ -1,39 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import './WeddingParallax.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./WeddingParallax.css";
 
 const WeddingParallax = () => {
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [isMobile, setIsMobile] = useState(false);
+
+    const wrapperRef = useRef(null);
+    const imgRef = useRef(null);
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
+            setIsMobile(window.innerWidth <= 768);
         };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+
+        handleResize();
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
-    // Different images for mobile and desktop
-    const mobileImage = 'https://res.cloudinary.com/ddyh4pftg/image/upload/v1780212545/photo2.jpg'; // Tall image for mobile
-    const desktopImage = 'https://images.pexels.com/photos/27876531/pexels-photo-27876531.jpeg'; // Wide image for desktop
+    useEffect(() => {
+        if (!isMobile) return;
 
-    const parallaxImage = isMobile ? mobileImage : desktopImage;
+        const handleScroll = () => {
+            if (!wrapperRef.current || !imgRef.current) return;
+
+            const rect = wrapperRef.current.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+
+            if (rect.bottom > 0 && rect.top < viewportHeight) {
+                const totalRange = viewportHeight + rect.height;
+                const currentScroll = viewportHeight - rect.top;
+                const scrollRatio = Math.max(0, Math.min(1, currentScroll / totalRange));
+
+                // The image has top: -20% and height: 140% in CSS.
+                // We can translate it safely up to 20% of wrapper height.
+                const maxTranslation = rect.height * 0.2;
+                const translation = (scrollRatio - 0.5) * maxTranslation;
+
+                imgRef.current.style.transform = `translate3d(0, ${translation}px, 0)`;
+            }
+        };
+
+        // Initialize position on mount/resize
+        handleScroll();
+
+        window.addEventListener("scroll", handleScroll, {
+            passive: true,
+        });
+        window.addEventListener("resize", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleScroll);
+        };
+    }, [isMobile]);
+
+    const mobileImage =
+        "https://res.cloudinary.com/ddyh4pftg/image/upload/v1780212545/photo2.jpg";
+
+    const desktopImage =
+        "https://images.pexels.com/photos/27876531/pexels-photo-27876531.jpeg";
 
     return (
-        <section className="parallax-wrapper">
-            {/* Background — different images for mobile/desktop, parallax on both */}
+        <section ref={wrapperRef} className="parallax-wrapper">
             <div
+                ref={imgRef}
                 className="parallax-img"
                 style={{
-                    backgroundImage: `url('${parallaxImage}')`,
+                    backgroundImage: `url(${isMobile ? mobileImage : desktopImage
+                        })`,
                 }}
             />
 
-            {/* Content */}
             <div className="wedding-text">
                 <h2>
-                    <span className="wedding-textbg">Groom & Bride</span>
+                    <span className="wedding-textbg">
+                        Groom & Bride
+                    </span>
                 </h2>
-                <p className="mt-4 text-textMain/80 text-xs tracking-[0.3em] uppercase">
+
+                <p className="subtitle">
                     A Forever Kind of Love
                 </p>
             </div>
