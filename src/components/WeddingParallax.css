@@ -1,5 +1,5 @@
 /* =========================
-   DESKTOP
+   DESKTOP (unchanged)
 ========================= */
 
 .parallax-wrapper {
@@ -20,8 +20,7 @@
   will-change: transform;
 }
 
-/* Text */
-
+/* Text (unchanged) */
 .wedding-text {
   position: absolute;
   top: 50%;
@@ -75,7 +74,7 @@
     height: 140%;
     background-size: cover;
     background-position: center;
-    transform: translateY(0);
+    /* REMOVED: transform: translateY(0); */
     will-change: transform;
     z-index: 1;
   }

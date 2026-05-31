@@ -13,48 +13,53 @@ const WeddingParallax = () => {
         };
 
         handleResize();
-
         window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    /* ---------- MOBILE PARALLAX ---------- */
     useEffect(() => {
         if (!isMobile) return;
+
+        let rafId = null;
 
         const handleScroll = () => {
             if (!wrapperRef.current || !imgRef.current) return;
 
             const rect = wrapperRef.current.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
+            const vh = window.innerHeight;
 
-            if (rect.bottom > 0 && rect.top < viewportHeight) {
-                const totalRange = viewportHeight + rect.height;
-                const currentScroll = viewportHeight - rect.top;
-                const scrollRatio = Math.max(0, Math.min(1, currentScroll / totalRange));
+            // Only animate while the section is in the viewport
+            if (rect.bottom < 0 || rect.top > vh) return;
 
-                // The image has top: -20% and height: 140% in CSS.
-                // We can translate it safely up to 20% of wrapper height.
-                const maxTranslation = rect.height * 0.2;
-                const translation = (scrollRatio - 0.5) * maxTranslation;
+            // 0 = section just entering from bottom
+            // 1 = section just leaving at top
+            const progress = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
 
-                imgRef.current.style.transform = `translate3d(0, ${translation}px, 0)`;
-            }
+            // Because the image is 140% height with top: -20%,
+            // we can safely translate it ±20% of the wrapper height
+            // without ever showing empty space.
+            const maxMove = rect.height * 0.2;
+            const translate = (progress - 0.5) * 2 * maxMove; // range: -20% → +20%
+
+            imgRef.current.style.transform = `translate3d(0, ${translate}px, 0)`;
         };
 
-        // Initialize position on mount/resize
+        const onScroll = () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(handleScroll);
+        };
+
+        // Initialise position immediately
         handleScroll();
 
-        window.addEventListener("scroll", handleScroll, {
-            passive: true,
-        });
+        window.addEventListener("scroll", onScroll, { passive: true });
         window.addEventListener("resize", handleScroll);
 
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", onScroll);
             window.removeEventListener("resize", handleScroll);
+            if (rafId) cancelAnimationFrame(rafId);
         };
     }, [isMobile]);
 
@@ -70,21 +75,15 @@ const WeddingParallax = () => {
                 ref={imgRef}
                 className="parallax-img"
                 style={{
-                    backgroundImage: `url(${isMobile ? mobileImage : desktopImage
-                        })`,
+                    backgroundImage: `url(${isMobile ? mobileImage : desktopImage})`,
                 }}
             />
 
             <div className="wedding-text">
                 <h2>
-                    <span className="wedding-textbg">
-                        Groom & Bride
-                    </span>
+                    <span className="wedding-textbg">Groom & Bride</span>
                 </h2>
-
-                <p className="subtitle">
-                    A Forever Kind of Love
-                </p>
+                <p className="subtitle">A Forever Kind of Love</p>
             </div>
         </section>
     );
