@@ -61,25 +61,31 @@
 }
 
 /* =========================================
-   📱 MOBILE — PARALLAX ENABLED WITH TALL IMAGE
+   📱 MOBILE — PARALLAX WITH TALL IMAGE (PRESERVED ASPECT RATIO)
    ========================================= */
 @media (max-width: 768px) {
   .parallax-wrapper {
     height: 100vh;
     width: 100%;
     overflow: hidden;
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+    background-color: #FAF9F6;
   }
 
   .parallax-img {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100vw;
+    left: 0;          /* ✅ back to 0, not 50% */
+    right: 0;
+    bottom: 0;
+    width: 100vw;     /* ✅ full width */
     height: 100vh;
-    background-size: cover;
-    background-position: center center;
+    background-size: cover;           /* ✅ fills screen, no gaps */
+    background-position: center top;  /* ✅ keeps face/subject visible */
     background-repeat: no-repeat;
     z-index: -1;
+    transform: translateZ(0);         /* keep GPU compositing */
   }
 
   .wedding-text {
