@@ -8,25 +8,34 @@ import { testimonialPreset, IMAGE_NAMES } from '../config/cloudinary';
 const testimonials = [
   {
     id: 1,
-    name: "Sneha & Varun",
+    name: "Devyani & Sai ",
     text: "Choosing this studio was the best decision we made for our wedding. The team made us feel so comfortable, and the photos are absolutely breathtaking!",
     image: testimonialPreset(IMAGE_NAMES.TESTIMONIAL_SNEHA_VARUN),
-    dataName: "Sneha & Varun Review"
+    dataName: "Devyani & Sai Review"
   },
   {
     id: 2,
-    name: "Ananya & Siddharth",
+    name: "Chaitanya & Vrushali ",
     text: "Our cinematic film felt like a real movie. They captured every emotion perfectly. Highly recommend their services for anyone looking for premium photography.",
     image: testimonialPreset(IMAGE_NAMES.TESTIMONIAL_ANANYA_SIDDHARTH),
-    dataName: "Ananya & Siddharth Review"
+    dataName: "Chaitanya & Vrushali Review"
   },
   {
     id: 3,
-    name: "Riya & Karan",
+    name: "Piyush & Nikita",
     text: "Professional, punctual, and creatively brilliant. The album quality is spectacular and the frames are stunning. Worth every penny!",
     image: testimonialPreset(IMAGE_NAMES.TESTIMONIAL_RIYA_KARAN),
-    dataName: "Riya & Karan Review"
+    dataName: "Piyush & Nikita Review"
+  },
+
+  {
+    id: 4,
+    name: "Prachi & Vijay",
+    text: "Professional, punctual, and creatively brilliant. The album quality is spectacular and the frames are stunning. Worth every penny!",
+    image: testimonialPreset(IMAGE_NAMES.TESTIMONIAL_RIYA_KARAN),
+    dataName: "Prachi & Vijay Review"
   }
+
 ];
 
 const Testimonials = () => {

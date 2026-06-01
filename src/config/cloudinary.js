@@ -17,8 +17,8 @@ const IMAGE_EXTENSION = ".jpg"; // Default extension for masonry images
  * Image & Video Public IDs / URLs
  */
 export const IMAGE_NAMES = {
-  HERO_VIDEO: "Wedding_Highlight_Final_online-video-cutter.com_belt9v",
-  HERO_VIDEO_MOBILE: "mobile-hero-bg_pioych",
+  HERO_VIDEO: "mobile-hero-bg_pioych11",
+  HERO_VIDEO_MOBILE: "mobile-hero-bg_pioych11",
 
   // About Section
   ABOUT_STUDIO_VIDEO: "studio-team_amw9rj",

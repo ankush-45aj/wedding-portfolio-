@@ -4,77 +4,86 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-textMain text-primary py-16">
+    <footer className="bg-zinc-950 text-zinc-300 py-16 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+
         {/* Logo & Intro */}
-        <div className="flex justify-center md:justify-start">
-          <Link to="/" className="text-3xl font-serif font-bold uppercase tracking-widest text-accent text-center md:text-left">
-            Studio Name
+        <div className="flex flex-col items-center md:items-start gap-4">
+          <Link to="/" className="text-3xl font-serif font-bold uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors duration-300">
+            Ankush Studio
           </Link>
+          <p className="text-zinc-400 text-sm font-light text-center md:text-left max-w-xs leading-relaxed">
+            Capturing raw emotions, timeless love, and cinematic frames. Making your moments live forever.
+          </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h4 className="font-serif text-xl mb-6 text-accent">Quick Links</h4>
-          <ul className="flex flex-col gap-3 font-light tracking-wider">
-            <li><Link to="/" className="hover:text-accent transition-colors">Home</Link></li>
-            <li><Link to="/portfolio" className="hover:text-accent transition-colors">Portfolio</Link></li>
-            <li><Link to="/about" className="hover:text-accent transition-colors">About</Link></li>
-            <li><Link to="/contact" className="hover:text-accent transition-colors">Contact</Link></li>
+          <h4 className="font-serif text-xl mb-6 text-amber-400">Quick Links</h4>
+          <ul className="flex flex-col gap-3 font-light tracking-wider text-sm">
+            <li><Link to="/" className="text-zinc-400 hover:text-amber-400 transition-colors duration-300">Home</Link></li>
+            <li><Link to="/portfolio" className="text-zinc-400 hover:text-amber-400 transition-colors duration-300">My Portfolio</Link></li>
+            <li><Link to="/about" className="text-zinc-400 hover:text-amber-400 transition-colors duration-300">About</Link></li>
+            <li><Link to="/contact" className="text-zinc-400 hover:text-amber-400 transition-colors duration-300">Contact</Link></li>
           </ul>
         </div>
 
         {/* Services */}
         <div>
-          <h4 className="font-serif text-xl mb-6 text-accent">Services</h4>
-          <ul className="flex flex-col gap-3 font-light tracking-wider">
-            <li>Wedding Photography</li>
-            <li>Pre-Wedding Shoots</li>
-            <li>Event Coverage</li>
-            <li>Cinematic Films</li>
+          <h4 className="font-serif text-xl mb-6 text-amber-400">Services</h4>
+          <ul className="flex flex-col gap-3 font-light tracking-wider text-sm text-zinc-400">
+            <li className="hover:text-amber-400 transition-colors duration-300 cursor-pointer">Wedding Photography</li>
+            <li className="hover:text-amber-400 transition-colors duration-300 cursor-pointer">Pre-Wedding Shoots</li>
+            <li className="hover:text-amber-400 transition-colors duration-300 cursor-pointer">Event Coverage</li>
+            <li className="hover:text-amber-400 transition-colors duration-300 cursor-pointer">Cinematic Films</li>
+            <li className="hover:text-amber-400 transition-colors duration-300 cursor-pointer">Birthday</li>
+            <li className="hover:text-amber-400 transition-colors duration-300 cursor-pointer">Pre Birthday</li>
+            <li className="hover:text-amber-400 transition-colors duration-300 cursor-pointer">Cinematic Reels</li>
+            <li className="hover:text-amber-400 transition-colors duration-300 cursor-pointer">& Many more Events</li>
           </ul>
         </div>
 
         {/* Contact */}
         <div>
-          <h4 className="font-serif text-xl mb-6 text-accent">Contact</h4>
-          <ul className="flex flex-col gap-4 font-light tracking-wider">
-            <li className="flex items-center gap-3">
-              <Phone size={18} className="text-accent" />
+          <h4 className="font-serif text-xl mb-6 text-amber-400">Contact</h4>
+          <ul className="flex flex-col gap-4 font-light tracking-wider text-sm">
+            <li className="flex items-center gap-3 text-zinc-400">
+              <Phone size={18} className="text-amber-400" />
               <span>+91 98765 43210</span>
             </li>
-            <li className="flex items-center gap-3">
-              <Mail size={18} className="text-accent" />
-              <span>info@studioname.com</span>
+            <li className="flex items-center gap-3 text-zinc-400">
+              <Mail size={18} className="text-amber-400" />
+              <span>info@ankushstudio.com</span>
             </li>
-            <li className="flex items-center gap-3">
-              <MapPin size={18} className="text-accent min-w-[18px]" />
+            <li className="flex items-start gap-3 text-zinc-400">
+              <MapPin size={18} className="text-amber-400 min-w-[18px] mt-0.5" />
               <span>123 Wedding Avenue, Bandra West, Mumbai, Maharashtra 400050, India</span>
             </li>
           </ul>
-          
-          <div className="flex gap-4 mt-6 flex-wrap">
-            <a href="https://www.facebook.com/yourprofile" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="Facebook">
-              <span className="font-bold text-textMain text-sm">FB</span>
+
+          {/* Clean, Non-breaking Social Badges */}
+          <div className="flex gap-3 mt-8 flex-wrap">
+            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Facebook">
+              FB
             </a>
-            <a href="https://twitter.com/yourprofile" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="Twitter">
-              <span className="font-bold text-textMain text-sm">X</span>
+            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Twitter">
+              X
             </a>
-            <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="Instagram">
-              <Camera size={20} className="text-textMain" />
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-8 h-8 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 flex items-center justify-center hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Instagram">
+              <Camera size={16} />
             </a>
-            <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="LinkedIn">
-              <span className="font-bold text-textMain text-sm">IN</span>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="LinkedIn">
+              IN
             </a>
-            <a href="https://www.youtube.com/channel/yourchannel" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors" aria-label="YouTube">
-              <span className="font-bold text-textMain text-sm">YT</span>
+            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="YouTube">
+              YT
             </a>
           </div>
         </div>
       </div>
-      
-      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-accent/10 text-center font-light text-sm opacity-70">
-        &copy; 2026 Studio Name. All rights reserved.
+
+      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-zinc-900 text-center font-light text-xs tracking-widest text-zinc-500">
+        &copy; {new Date().getFullYear()} Ankush Studio. All rights reserved.
       </div>
     </footer>
   );
