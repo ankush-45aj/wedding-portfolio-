@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Logo & Intro */}
         <div className="flex flex-col items-center md:items-start gap-4">
           <Link to="/" className="text-3xl font-serif font-bold uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors duration-300">
-            Ankush Studio
+            Dee Photography
           </Link>
           <p className="text-zinc-400 text-sm font-light text-center md:text-left max-w-xs leading-relaxed">
             Capturing raw emotions, timeless love, and cinematic frames. Making your moments live forever.
@@ -49,15 +49,16 @@ const Footer = () => {
           <ul className="flex flex-col gap-4 font-light tracking-wider text-sm">
             <li className="flex items-center gap-3 text-zinc-400">
               <Phone size={18} className="text-amber-400" />
-              <span>+91 98765 43210</span>
+              <span>+91 9356300456</span>
             </li>
             <li className="flex items-center gap-3 text-zinc-400">
               <Mail size={18} className="text-amber-400" />
-              <span>info@ankushstudio.com</span>
+              <span>
+                deephotography45@gmail.com</span>
             </li>
             <li className="flex items-start gap-3 text-zinc-400">
               <MapPin size={18} className="text-amber-400 min-w-[18px] mt-0.5" />
-              <span>123 Wedding Avenue, Bandra West, Mumbai, Maharashtra 400050, India</span>
+              <span>Virar ( East ) Maharashtra 401305, India</span>
             </li>
           </ul>
 
@@ -66,15 +67,11 @@ const Footer = () => {
             <a href="https://facebook.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Facebook">
               FB
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Twitter">
-              X
-            </a>
+
             <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-8 h-8 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 flex items-center justify-center hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Instagram">
               <Camera size={16} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="LinkedIn">
-              IN
-            </a>
+
             <a href="https://youtube.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="YouTube">
               YT
             </a>
