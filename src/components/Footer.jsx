@@ -64,16 +64,12 @@ const Footer = () => {
 
           {/* Clean, Non-breaking Social Badges */}
           <div className="flex gap-3 mt-8 flex-wrap">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Facebook">
+            <a href="https://www.facebook.com/darshan.panchal.836212" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Facebook">
               FB
             </a>
 
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-8 h-8 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 flex items-center justify-center hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Instagram">
+            <a href="https://www.instagram.com/__dee1202" target="_blank" rel="noreferrer" className="w-8 h-8 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 flex items-center justify-center hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Instagram">
               <Camera size={16} />
-            </a>
-
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="YouTube">
-              YT
             </a>
           </div>
         </div>

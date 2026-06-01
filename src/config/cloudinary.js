@@ -9,7 +9,7 @@ const CLOUDINARY_CLOUD_NAME =
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com";
 
 const CLOUDINARY_FOLDER = ""; // Leave empty if using direct photo names
-const CLOUDINARY_VERSION = "v1780346468"; // Version ID from Cloudinary
+const CLOUDINARY_VERSION = "v1780349616"; // Version ID from Cloudinary
 const IMAGE_EXTENSION = ".jpg"; // Default extension for masonry images
 
 
@@ -30,19 +30,19 @@ export const IMAGE_NAMES = {
   GALLERY_CINEMATIC: "cinematic_films",
 
   // Video Section
-  VIDEO_ADITI_RAHUL: "video-aditi-rahul",
-  VIDEO_ADITI_RAHUL_POSTER: "poster-aditi-rahul",
+  DevyaniSai: "DevyaniSai",
+  DevyaniSai_POSTER: "poster-DevyaniSai",
 
-  VIDEO_MEERA_KABIR: "video-meera-kabir",
-  VIDEO_MEERA_KABIR_POSTER: "poster-meera-kabir",
+  ChaitanyaVrushali: "ChaitanyaVrushali",
+  ChaitanyaVrushali_POSTER: "poster-ChaitanyaVrushali",
 
-  VIDEO_PRIYA_ROHAN: "video-priya-rohan",
-  VIDEO_PRIYA_ROHAN_POSTER: "poster-priya-rohan",
+  VIDEO_PRIYA_ROHAN: "KhushbooKunal",
+  VIDEO_PRIYA_ROHAN_POSTER: "KhushbooKunalposter",
 
   // Testimonials
-  TESTIMONIAL_SNEHA_VARUN: "testimonial-sneha-varun",
-  TESTIMONIAL_ANANYA_SIDDHARTH: "testimonial-ananya-siddharth",
-  TESTIMONIAL_RIYA_KARAN: "testimonial-riya-karan",
+  TESTIMONIAL_SNEHA_VARUN: "poster-DevyaniSai",
+  TESTIMONIAL_ANANYA_SIDDHARTH: "poster-ChaitanyaVrushali",
+  TESTIMONIAL_RIYA_KARAN: "KhushbooKunalposter",
 
   // Masonry Grid (keep full URLs if you want)
  MASONRY_WEDDING_MOMENT: "photo1",

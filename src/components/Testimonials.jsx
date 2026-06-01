@@ -22,10 +22,10 @@ const testimonials = [
   },
   {
     id: 3,
-    name: "Piyush & Nikita",
+    name: "Khushboo & Kunal",
     text: "Professional, punctual, and creatively brilliant. The album quality is spectacular and the frames are stunning. Worth every penny!",
     image: testimonialPreset(IMAGE_NAMES.TESTIMONIAL_RIYA_KARAN),
-    dataName: "Piyush & Nikita Review"
+    dataName: "Khushboo & Kunal Review"
   },
 
   {
