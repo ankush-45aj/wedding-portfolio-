@@ -28,13 +28,7 @@ const testimonials = [
     dataName: "Khushboo & Kunal Review"
   },
 
-  {
-    id: 4,
-    name: "Prachi & Vijay",
-    text: "Professional, punctual, and creatively brilliant. The album quality is spectacular and the frames are stunning. Worth every penny!",
-    image: testimonialPreset(IMAGE_NAMES.TESTIMONIAL_RIYA_KARAN),
-    dataName: "Prachi & Vijay Review"
-  }
+
 
 ];
 

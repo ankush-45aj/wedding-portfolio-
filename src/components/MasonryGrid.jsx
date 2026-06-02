@@ -266,30 +266,49 @@ const ScatteredGrid = () => {
         </div>
 
         {/* ── Footer Typography ─────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end w-full mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center w-full mt-12">
+
+          {/* Left Side */}
+
           <div className="relative">
-            <h2 className="text-5xl md:text-8xl font-bold text-black leading-[0.85] tracking-tight">
-              <span className="block text-6xl md:text-9xl">न</span>
-              <span className="block -mt-1 md:-mt-4 ml-1 md:ml-2">जराणा</span>
+            <h2 className="text-6xl md:text-[8rem] font-bold text-black leading-none tracking-tight">
+              नजराणा
             </h2>
-            <p className="mt-5 text-[9px] md:text-[10px] text-gray-500 tracking-widest uppercase font-medium">
-              Archived by Raggen.
+
+            ```
+            <div className="w-20 h-px bg-gray-300 mt-6"></div>
+
+            <p className="mt-5 text-xs md:text-sm text-gray-500 tracking-[0.3em] uppercase">
+              Wedding Photography & Films
             </p>
+            ```
+
           </div>
-          <div className="flex flex-col items-start md:items-end gap-4">
-            <div className="max-w-xs">
-              <h3 className="text-base md:text-lg font-semibold text-black mb-2">जीवनाचे रंग</h3>
-              <p className="text-sm text-gray-600 leading-relaxed text-left md:text-right">
+
+          {/* Right Side */}
+
+          <div className="flex flex-col md:items-end">
+            <div className="max-w-md">
+              <h3 className="text-2xl md:text-3xl font-semibold text-black mb-4">
+                जीवनाचे रंग
+              </h3>
+
+              ```
+              <p className="text-base text-gray-600 leading-relaxed text-left md:text-right">
                 जेव्हा शब्द अपुरे पडतात, तेव्हा चित्र बोलू लागतात.
               </p>
-              <p className="text-xs text-gray-500 mt-3 leading-relaxed text-left md:text-right">
-                हे आहेत ते क्षण जे काळालाही विसरता येत नाहीत —
-                एक महिना, अनेक emotions, अनंत आठवणी.
+
+              <p className="text-sm text-gray-500 mt-5 leading-relaxed text-left md:text-right">
+                प्रेम, हसू आणि भावनांनी भरलेल्या प्रत्येक क्षणाला
+                आम्ही छायाचित्रांमध्ये जपून ठेवतो.
               </p>
             </div>
+            ```
+
           </div>
         </div>
       </div>
+
 
       {/* ── Lightbox ──────────────────────────────────────────────────────── */}
       <AnimatePresence>

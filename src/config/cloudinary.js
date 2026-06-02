@@ -9,7 +9,7 @@ const CLOUDINARY_CLOUD_NAME =
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com";
 
 const CLOUDINARY_FOLDER = ""; // Leave empty if using direct photo names
-const CLOUDINARY_VERSION = "v1780349616"; // Version ID from Cloudinary
+const CLOUDINARY_VERSION = "v1780427038"; // Version ID from Cloudinary
 const IMAGE_EXTENSION = ".jpg"; // Default extension for masonry images
 
 
@@ -24,7 +24,7 @@ export const IMAGE_NAMES = {
   ABOUT_STUDIO_VIDEO: "studio-team_amw9rj",
 
   // Gallery Section
-  GALLERY_WEDDINGS: "weddings-gallery",
+  GALLERY_WEDDINGS: "photo5",
   GALLERY_PRE_WEDDING: "gallery-pre-wedding",
   GALLERY_EVENTS: "gallery_events",
   GALLERY_CINEMATIC: "cinematic_films",
