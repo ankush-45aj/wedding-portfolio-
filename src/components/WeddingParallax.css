@@ -31,7 +31,6 @@
 /* Disable parallax on mobile */
 @media (max-width: 768px) {
   .parallax-wrapper {
-    background-attachment: scroll;
-    height: 70vh;
+    display: none;
   }
 }
