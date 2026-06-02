@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { masonryPreset, IMAGE_NAMES } from '../config/cloudinary';
+import { masonryPreset, lightboxPreset, IMAGE_NAMES } from '../config/cloudinary';
 
 // ─── Images: exactly 17 ──────────────────────────────────────────────────────
 const images = [
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_COUPLE, '4/3'), alt: 'Couple', name: 'Couple Portrait', caption: 'Just us against the world' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_HANDS, '1/1'), alt: 'Hands', name: 'Wedding Hands', caption: 'Holding hands, holding hearts' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_PHOTOGRAPHER, '4/5'), alt: 'Photographer', name: 'Behind the Scenes', caption: 'Capturing memories in the making' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_VENUE, '4/3'), alt: 'Venue', name: 'Venue Decoration', caption: 'Where magic happened' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_FLOWERS, '4/3'), alt: 'Flowers', name: 'Floral Arrangements', caption: 'Blooms of happiness' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_FRIENDS, '4/3'), alt: 'Friends', name: 'Friends & Family', caption: 'Surrounded by love' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_WEDDING_MOMENT, '1/1'), alt: 'Wedding moment', name: 'Wedding Moment', caption: 'The moment we said forever' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP1, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP2, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_CELEBRATION, '4/5'), alt: 'Celebration', name: 'Celebration Moment', caption: 'Joy in every frame' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP3, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP4, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP5, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP6, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP7, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
-  { src: masonryPreset(IMAGE_NAMES.MASONRY_GROUP8, '4/3'), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' }
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_COUPLE, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_COUPLE), alt: 'Couple', name: 'Couple Portrait', caption: 'Just us against the world' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_HANDS, '1/1'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_HANDS), alt: 'Hands', name: 'Wedding Hands', caption: 'Holding hands, holding hearts' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_PHOTOGRAPHER, '4/5'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_PHOTOGRAPHER), alt: 'Photographer', name: 'Behind the Scenes', caption: 'Capturing memories in the making' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_VENUE, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_VENUE), alt: 'Venue', name: 'Venue Decoration', caption: 'Where magic happened' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_FLOWERS, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_FLOWERS), alt: 'Flowers', name: 'Floral Arrangements', caption: 'Blooms of happiness' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_FRIENDS, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_FRIENDS), alt: 'Friends', name: 'Friends & Family', caption: 'Surrounded by love' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_WEDDING_MOMENT, '1/1'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_WEDDING_MOMENT), alt: 'Wedding moment', name: 'Wedding Moment', caption: 'The moment we said forever' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_GROUP, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_GROUP), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_GROUP1, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_GROUP1), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_GROUP2, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_GROUP2), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_CELEBRATION, '4/5'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_CELEBRATION), alt: 'Celebration', name: 'Celebration Moment', caption: 'Joy in every frame' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_GROUP3, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_GROUP3), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_GROUP4, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_GROUP4), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_GROUP5, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_GROUP5), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_GROUP6, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_GROUP6), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_GROUP7, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_GROUP7), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' },
+  { gridSrc: masonryPreset(IMAGE_NAMES.MASONRY_GROUP8, '4/3'), lightboxSrc: lightboxPreset(IMAGE_NAMES.MASONRY_GROUP8), alt: 'Group', name: 'Group Photo', caption: 'Together is our favorite place' }
 ];
 
 // ─── Heart layout on a 9-col × 7-row grid ────────────────────────────────────
@@ -237,11 +237,11 @@ const ScatteredGrid = () => {
                   whileTap={{ scale: 0.97 }}
                 >
                   <img
-                    src={image.src}
+                    src={image.gridSrc}
                     alt={image.alt}
                     loading="lazy"
                     onError={(e) => {
-                      console.warn(`⚠️ Image failed to load (${cellIdx}):`, image.src);
+                      console.warn(`⚠️ Image failed to load (${cellIdx}):`, image.gridSrc);
                       e.target.style.backgroundColor = '#f0f0f0';
                       e.target.textContent = '❌ Image not found';
                     }}
@@ -275,13 +275,13 @@ const ScatteredGrid = () => {
               नजराणा
             </h2>
 
-            ```
+
             <div className="w-20 h-px bg-gray-300 mt-6"></div>
 
             <p className="mt-5 text-xs md:text-sm text-gray-500 tracking-[0.3em] uppercase">
               Wedding Photography & Films
             </p>
-            ```
+
 
           </div>
 
@@ -293,7 +293,7 @@ const ScatteredGrid = () => {
                 जीवनाचे रंग
               </h3>
 
-              ```
+
               <p className="text-base text-gray-600 leading-relaxed text-left md:text-right">
                 जेव्हा शब्द अपुरे पडतात, तेव्हा चित्र बोलू लागतात.
               </p>
@@ -303,7 +303,7 @@ const ScatteredGrid = () => {
                 आम्ही छायाचित्रांमध्ये जपून ठेवतो.
               </p>
             </div>
-            ```
+
 
           </div>
         </div>
@@ -340,17 +340,17 @@ const ScatteredGrid = () => {
             </button>
 
             <div
-              className="flex-1 flex items-center justify-center p-6 pb-36 md:pb-40"
+              className="flex-1 flex items-center justify-center p-6 pb-36 md:pb-40 overflow-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <motion.img
                 key={selectedIndex}
-                src={currentImage.src}
+                src={currentImage.lightboxSrc}
                 alt={currentImage.alt}
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.25 }}
-                className="w-auto h-auto max-w-full max-h-[65vh] object-contain shadow-xl rounded-sm"
+                className="w-auto h-auto max-w-full max-h-[70vh] object-contain shadow-xl rounded-sm"
               />
             </div>
 

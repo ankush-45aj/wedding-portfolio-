@@ -224,3 +224,10 @@ export const masonryPreset = (imageName, aspectRatio = "4/5") => {
     height,
   });
 };
+
+// Lightbox
+export const lightboxPreset = (imageName) =>
+  buildCloudinaryImageUrl(imageName, {
+    width: 1600,
+    crop: "fit",
+  });
