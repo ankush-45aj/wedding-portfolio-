@@ -9,7 +9,7 @@ const CLOUDINARY_CLOUD_NAME =
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com";
 
 const CLOUDINARY_FOLDER = ""; // Leave empty if using direct photo names
-const CLOUDINARY_VERSION = "v1780427038"; // Version ID from Cloudinary
+const CLOUDINARY_VERSION = ""; // Version ID from Cloudinary
 const IMAGE_EXTENSION = ".jpg"; // Default extension for masonry images
 
 
@@ -109,13 +109,15 @@ export const buildCloudinaryImageUrl = (imageName, options = {}) => {
       width = "auto",
       height = "auto",
       crop = "fill",
-      quality = "auto",
+      quality = "auto:good",
       format = "auto",
+      dpr = "auto",
     } = options;
 
     const transforms = [
       width !== "auto" && `w_${width}`,
       height !== "auto" && `h_${height}`,
+      width === "auto" && `dpr_${dpr}`,
       `c_${crop}`,
       `q_${quality}`,
       `f_${format}`,
@@ -148,7 +150,7 @@ export const buildCloudinaryVideoUrl = (videoName, options = {}) => {
     const {
       width = "auto",
       height = "auto",
-      quality = "auto",
+      quality = "auto:good",
       video_codec = "auto",
       streaming = false,
     } = options;
@@ -182,15 +184,18 @@ export const heroVideoPreset = (videoName) =>
   buildCloudinaryVideoUrl(videoName, {
     width: 1920,
     height: 1080,
-    quality: "auto:low",
+    quality: "auto:good",
+    video_codec: "auto",
     streaming: false, // ⚠️ keep false unless using Video.js
   });
 
-// Gallery Images
+// Gallery Images (High Quality Showcase)
 export const galleryImagePreset = (imageName) =>
   buildCloudinaryImageUrl(imageName, {
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 750,
+    quality: "auto:best",
+    format: "auto",
   });
 
 // Testimonial Avatar
@@ -201,33 +206,37 @@ export const testimonialPreset = (imageName) =>
     crop: "thumb",
   });
 
-// Masonry Grid
+// Masonry Grid (Optimized for 30-60% bandwidth savings on mobile)
 export const masonryPreset = (imageName, aspectRatio = "4/5") => {
   let height;
 
   switch (aspectRatio) {
     case "1/1":
-      height = 500;
+      height = 400;
       break;
     case "4/3":
-      height = 375;
+      height = 300;
       break;
     case "3/4":
-      height = 667;
+      height = 533;
       break;
     default:
-      height = 625;
+      height = 500;
   }
 
   return buildCloudinaryImageUrl(imageName, {
-    width: 500,
+    width: 400,
     height,
+    quality: "auto:good",
+    format: "auto",
   });
 };
 
-// Lightbox
+// Lightbox (High quality for full-screen viewing)
 export const lightboxPreset = (imageName) =>
   buildCloudinaryImageUrl(imageName, {
     width: 1600,
     crop: "fit",
+    quality: "auto:good",
+    format: "auto",
   });

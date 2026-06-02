@@ -56,6 +56,7 @@ const VideoModal = ({ video, isOpen, onClose }) => {
             poster={video.poster}
             controls
             autoPlay
+            preload="metadata"
             className="w-full h-full"
           />
         </div>
@@ -100,6 +101,7 @@ const VideoSection = () => {
               <img
                 src={vid.poster}
                 alt={vid.title}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none"></div>
