@@ -32,16 +32,16 @@ const ContactForm = () => {
                 Email Us
               </span>
               <a
-                href="mailto:hello@studioname.com"
+                href="mailto:deephotography45@gmail.com"
                 className="text-xl hover:text-accent transition-colors duration-300"
               >
-                hello@studioname.com
+                deephotography45@gmail.com
               </a>
             </div>
 
             <div className="border border-accent/30 bg-white shadow-md p-6 rounded-sm flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <a
-                href="https://wa.me/919876543210"
+                href="https://wa.me/9356300456"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 px-8 py-3 bg-[#25D366] text-white hover:opacity-90 transition-all rounded-sm uppercase tracking-widest text-sm font-medium shadow-sm"
