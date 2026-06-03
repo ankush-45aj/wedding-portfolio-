@@ -1,8 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    date: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formData,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      alert('Message sent successfully!');
+
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        date: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error(error);
+      alert('Failed to send message');
+    }
+  };
+
   return (
     <section
       className="py-24 bg-secondary text-textMain relative"
@@ -72,7 +114,7 @@ const ContactForm = () => {
         >
           <form
             className="flex flex-col gap-6"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
@@ -87,6 +129,8 @@ const ContactForm = () => {
                   id="name"
                   placeholder="Your Name"
                   required
+                  value={formData.name}
+                  onChange={handleChange}
                   className="bg-transparent border-b border-accent/40 py-3 focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
@@ -103,9 +147,29 @@ const ContactForm = () => {
                   id="phone"
                   placeholder="Your Phone Number"
                   required
+                  value={formData.phone}
+                  onChange={handleChange}
                   className="bg-transparent border-b border-accent/40 py-3 focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="email"
+                className="text-xs uppercase tracking-widest text-accent font-medium"
+              >
+                Email
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                placeholder="Your Email Address"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className="bg-transparent border-b border-accent/40 py-3 focus:outline-none focus:border-accent transition-colors"
+              />
             </div>
 
             <div className="flex flex-col gap-2">
@@ -118,6 +182,8 @@ const ContactForm = () => {
               <input
                 type="date"
                 id="date"
+                value={formData.date}
+                onChange={handleChange}
                 className="bg-transparent border-b border-accent/40 py-3 focus:outline-none focus:border-accent transition-colors text-textLight"
               />
             </div>
@@ -134,6 +200,8 @@ const ContactForm = () => {
                 rows="4"
                 placeholder="Tell us about your wedding..."
                 required
+                value={formData.message}
+                onChange={handleChange}
                 className="bg-transparent border-b border-accent/40 py-3 focus:outline-none focus:border-accent transition-colors resize-none"
               />
             </div>

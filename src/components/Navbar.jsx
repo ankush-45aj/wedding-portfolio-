@@ -29,8 +29,8 @@ const Navbar = () => {
     <>
       <nav
         className={`fixed w-full z-50 transition-all duration-300 ${isScrolled && !isOpen
-            ? 'bg-primary text-textMain shadow-lg py-4'
-            : 'bg-transparent py-6'
+          ? 'bg-primary text-textMain shadow-lg py-4'
+          : 'bg-transparent py-6'
           } ${isOpen ? 'text-textMain' : 'text-textMain'}`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-50">
