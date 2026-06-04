@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const logoUrl = new URL('/logo.png', import.meta.url).href;
+  const logoUrl = 'https://res.cloudinary.com/ddyh4pftg/image/upload/v1780554406/logo_tjkacq.png';
 
   useEffect(() => {
     const handleScroll = () => {

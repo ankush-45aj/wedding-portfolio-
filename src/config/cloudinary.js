@@ -9,7 +9,7 @@ const CLOUDINARY_CLOUD_NAME =
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com";
 
 const CLOUDINARY_FOLDER = ""; // Leave empty if using direct photo names
-const CLOUDINARY_VERSION = "v1780483030"; // Version ID from Cloudinary
+const CLOUDINARY_VERSION = "v1780554406"; // Version ID from Cloudinary
 const IMAGE_EXTENSION = ".jpg"; // Default extension for masonry images
 
 
