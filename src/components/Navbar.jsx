@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const logoUrl = new URL('/logo.png', import.meta.url).href;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +40,7 @@ const Navbar = () => {
             onClick={handleMenuClick}
             className="flex items-center gap-3"
           >
-            <img src="/logo.png" alt="Dee Photography" className="h-8 md:h-10 object-contain rounded-lg" />
+            <img src={logoUrl} alt="Dee Photography" className="h-8 md:h-10 object-contain rounded-lg" />
             <span className="text-sm md:text-2xl font-serif tracking-widest uppercase font-bold">DEE PHOTOGRAPHY</span>
           </Link>
 
