@@ -37,9 +37,10 @@ const Navbar = () => {
           <Link
             to="/"
             onClick={handleMenuClick}
-            className="text-2xl font-serif tracking-widest uppercase font-bold"
+            className="flex items-center gap-3"
           >
-            DEE PHOTOGRAPHY
+            <img src="/logo.png" alt="Dee Photography" className="h-8 md:h-10 object-contain rounded-lg" />
+            <span className="text-sm md:text-2xl font-serif tracking-widest uppercase font-bold">DEE PHOTOGRAPHY</span>
           </Link>
 
           {/* Desktop Nav */}

@@ -20,21 +20,21 @@ const Home = () => {
       <Helmet>
         <title>Elegant Wedding Photography | Cinematic Love Stories</title>
         <meta name="description" content="Capture your special day with our elegant and timeless wedding photography. View our portfolio, read testimonials, and book our services." />
-        <link rel="canonical" href="https://wedding-portfolio-beta.vercel.app/" />
-        
+        <link rel="canonical" href="https://deephotography.com/" />
+
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://wedding-portfolio-beta.vercel.app/" />
+        <meta property="og:url" content="https://deephotography.com/" />
         <meta property="og:title" content="Elegant Wedding Photography | Cinematic Love Stories" />
         <meta property="og:description" content="Capture your special day with our elegant and timeless wedding photography. View our portfolio, read testimonials, and book our services." />
-        <meta property="og:image" content="https://wedding-portfolio-beta.vercel.app/fallback.jpg" />
+        <meta property="og:image" content="https://deephotography.com/fallback.jpg" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://wedding-portfolio-beta.vercel.app/" />
+        <meta name="twitter:url" content="https://deephotography.com/" />
         <meta name="twitter:title" content="Elegant Wedding Photography | Cinematic Love Stories" />
         <meta name="twitter:description" content="Capture your special day with our elegant and timeless wedding photography. View our portfolio, read testimonials, and book our services." />
-        <meta name="twitter:image" content="https://wedding-portfolio-beta.vercel.app/fallback.jpg" />
+        <meta name="twitter:image" content="https://dee-photography.vercel.app/fallback.jpg" />
       </Helmet>
       <Hero />
       <Gallery />
