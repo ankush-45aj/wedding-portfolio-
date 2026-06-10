@@ -1,53 +1,77 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { buildCloudinaryVideoUrl, IMAGE_NAMES } from '../config/cloudinary';
+import React from "react";
+import { motion } from "framer-motion";
+import { buildCloudinaryVideoUrl, IMAGE_NAMES } from "../config/cloudinary";
 
 const AboutSection = () => {
+  const isMobile =
+    typeof window !== "undefined" && window.innerWidth < 768;
+
+  const fadeRight = isMobile
+    ? {}
+    : {
+      initial: { opacity: 0, x: 60 },
+      whileInView: { opacity: 1, x: 0 },
+      viewport: { once: true },
+      transition: { duration: 0.8 },
+    };
+
+  const fadeLeft = isMobile
+    ? {}
+    : {
+      initial: { opacity: 0, x: -60 },
+      whileInView: { opacity: 1, x: 0 },
+      viewport: { once: true },
+      transition: { duration: 0.8 },
+    };
+
   return (
-    <section className="py-20 md:py-28 bg-primary text-textMain overflow-hidden" id="about">
+    <section
+      className="py-20 md:py-28 bg-primary text-textMain overflow-hidden"
+      id="about"
+    >
       <div className="max-w-7xl mx-auto px-5 md:px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20">
 
         {/* Left: Studio Video */}
         <motion.div
-          initial={{ opacity: 0, x: -60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          {...fadeLeft}
           className="w-full md:w-1/2 flex justify-center"
         >
-          <div className="
-  w-full 
-  max-w-[90%] 
-  sm:max-w-[420px] 
-  md:max-w-[480px] 
-  lg:max-w-[520px]
-  aspect-[4/5] 
-  rounded-2xl 
-  overflow-hidden 
-  shadow-xl 
-  border border-accent/20 
-  bg-secondary
-">
+          <div
+            className="
+              w-full
+              max-w-[90%]
+              sm:max-w-[420px]
+              md:max-w-[480px]
+              lg:max-w-[520px]
+              aspect-[4/5]
+              rounded-2xl
+              overflow-hidden
+              shadow-xl
+              border border-accent/20
+              bg-secondary
+            "
+          >
             <video
               src={buildCloudinaryVideoUrl(
                 IMAGE_NAMES.ABOUT_STUDIO_VIDEO,
-                { quality: 'auto', fetch_format: 'auto' } // 🔥 better optimization
+                {
+                  quality: "auto",
+                  fetch_format: "auto",
+                }
               )}
               className="w-full h-full object-contain bg-secondary"
               autoPlay
               muted
               loop
               playsInline
+              preload="metadata"
             />
           </div>
         </motion.div>
 
         {/* Right: Text */}
         <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          {...fadeRight}
           className="w-full md:w-1/2 text-center md:text-left"
         >
           <span className="text-accent tracking-[0.2em] uppercase text-xs mb-4 block">
@@ -62,11 +86,15 @@ const AboutSection = () => {
 
           <div className="space-y-4 md:space-y-6 text-textMain/80 font-light text-[15px] sm:text-[16px] md:text-[17px] leading-relaxed">
             <p>
-              We are a team of visual storytellers who believe every love story deserves to be felt, not just seen. From quiet glances to grand celebrations, we capture moments with honesty and depth.
+              We are a team of visual storytellers who believe every love story
+              deserves to be felt, not just seen. From quiet glances to grand
+              celebrations, we capture moments with honesty and depth.
             </p>
 
             <p>
-              Our approach blends cinematic aesthetics with real emotion — creating visuals that preserve not just how it looked, but how it felt.
+              Our approach blends cinematic aesthetics with real emotion —
+              creating visuals that preserve not just how it looked, but how it
+              felt.
             </p>
 
             <p className="text-textMain/60 italic">

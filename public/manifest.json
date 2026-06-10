@@ -1,0 +1,22 @@
+{
+    "name": "DEE Photography",
+    "short_name": "DEE Photo",
+    "description": "Professional wedding and pre-wedding photography services in Mumbai, Virar and Vasai.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "https://res.cloudinary.com/ddyh4pftg/image/upload/v1780554406/logo_tjkacq.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://res.cloudinary.com/ddyh4pftg/image/upload/v1780554406/logo_tjkacq.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
