@@ -16,6 +16,10 @@
             "dest": "/sitemap.xml"
         },
         {
+            "src": "^/manifest\\.json$",
+            "dest": "/manifest.json"
+        },
+        {
             "src": "^/(.*)",
             "dest": "/index.html"
         }
