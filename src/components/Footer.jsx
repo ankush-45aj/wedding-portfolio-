@@ -53,8 +53,7 @@ const Footer = () => {
             </li>
             <li className="flex items-center gap-3 text-zinc-400">
               <Mail size={18} className="text-amber-400" />
-              <span>
-                deephotography45@gmail.com</span>
+              <span>deephotography45@gmail.com</span>
             </li>
             <li className="flex items-start gap-3 text-zinc-400">
               <MapPin size={18} className="text-amber-400 min-w-[18px] mt-0.5" />
@@ -64,19 +63,33 @@ const Footer = () => {
 
           {/* Clean, Non-breaking Social Badges */}
           <div className="flex gap-3 mt-8 flex-wrap">
-            <a href="https://www.facebook.com/darshan.panchal.836212" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Facebook">
+            <a href="https://www.facebook.com/darshan.panchal.836212" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Facebook">
               FB
             </a>
 
-            <a href="https://www.instagram.com/__dee1202" target="_blank" rel="noreferrer" className="w-8 h-8 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 flex items-center justify-center hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Instagram">
+            <a href="https://www.instagram.com/__dee1202" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 flex items-center justify-center hover:bg-amber-400 hover:text-zinc-950 transition-all duration-300" aria-label="Instagram">
               <Camera size={16} />
             </a>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-zinc-900 text-center font-light text-xs tracking-widest text-zinc-500">
-        &copy; {new Date().getFullYear()} Ankush Studio. All rights reserved.
+      {/* Bottom Copyright & Credit Section */}
+      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left font-light text-xs tracking-widest text-zinc-500">
+        <div>
+          &copy; {new Date().getFullYear()} Dee Photography. All rights reserved.
+        </div>
+        <div className="tracking-normal normal-case opacity-80 hover:opacity-120 transition-opacity duration-300">
+          Website developed by{' '}
+          <a
+            href="https://portfolio-ankushjha.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-amber-300 hover:underline hover:text-amber-200"
+          >
+            Ankush Studios
+          </a>
+        </div>
       </div>
     </footer>
   );
